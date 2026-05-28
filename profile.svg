@@ -31,6 +31,9 @@
 @keyframes flowGlow{0%,100%{opacity:0.15;filter:drop-shadow(0 0 2px currentColor)}50%{opacity:0.5;filter:drop-shadow(0 0 6px currentColor)}}
 @keyframes nodeGlow{0%,100%{r:2;opacity:0.5}50%{r:3.5;opacity:1}}
 @keyframes scanLine{0%{transform:translateX(-100%)}100%{transform:translateX(850px)}}
+@keyframes wave{0%,100%{transform:translate(0,0)}15%{transform:translate(5px,-14px)}35%{transform:translate(0,-2px)}55%{transform:translate(5px,-14px)}75%{transform:translate(0,0)}}
+@keyframes peekBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes bubPop{0%{opacity:0;transform:scale(0.5)}60%{opacity:1;transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
 @keyframes gd0{0%{opacity:0.15}0%{opacity:0.15}2%{opacity:1}18%{opacity:1}20%{opacity:0.15}100%{opacity:0.15}}
 @keyframes gd1{0%{opacity:0.15}25%{opacity:0.15}27%{opacity:1}43%{opacity:1}45%{opacity:0.15}100%{opacity:0.15}}
 @keyframes gd2{0%{opacity:0.15}50%{opacity:0.15}52%{opacity:1}68%{opacity:1}70%{opacity:0.15}100%{opacity:0.15}}
@@ -45,6 +48,7 @@
 <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/></filter>
 <filter id="glow2"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 <linearGradient id="scanGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="40%" stop-color="#4285F4" stop-opacity="0.06"/><stop offset="50%" stop-color="#4285F4" stop-opacity="0.12"/><stop offset="60%" stop-color="#4285F4" stop-opacity="0.06"/><stop offset="100%" stop-color="transparent"/></linearGradient>
+<clipPath id="edgeClip"><rect x="0" y="0" width="850" height="1351"/></clipPath>
 </defs>
 <rect width="850" height="1351" fill="url(#mainBg)"/>
 <line x1="0" y1="0" x2="0" y2="1351" stroke="#21262d" stroke-width="0.3" opacity="0.15"/>
@@ -713,6 +717,35 @@
 <text x="44" y="386" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="400" fill="#e6edf3" style="animation:typeIn 0.4s ease-out 0.48s both">> Interested in CUDA kernel dev and GPU optimization</text>
 <rect x="44" y="398" width="7" height="13" fill="#4285F4" opacity="0.8" style="animation:blink 1.2s step-end infinite"/>
 </g>
+<g clip-path="url(#edgeClip)">
+<g transform="translate(850,321)">
+<g style="animation:peekBob 3s ease-in-out infinite">
+<circle cx="0" cy="15" r="42" fill="#3DDC84" opacity="0.035"/>
+<rect x="26" y="3" width="10" height="26" rx="5" fill="#3DDC84"/>
+<g style="animation:wave 2s ease-in-out infinite">
+<rect x="-36" y="3" width="10" height="26" rx="5" fill="#3DDC84"/>
+</g>
+<rect x="-22" y="0" width="44" height="36" rx="7" fill="#3DDC84"/>
+<circle cx="-8" cy="16" r="7" fill="#FBBC05" opacity="0.9"/>
+<circle cx="-8" cy="16" r="5.5" fill="#F4B400"/>
+<text x="-8" y="19.5" font-family="Google Sans,sans-serif" font-size="8" font-weight="700" fill="white" text-anchor="middle">K</text>
+<path d="M-24,-2 A24,22 0 0,1 24,-2 Z" fill="#3DDC84"/>
+<circle cx="-8" cy="-12" r="2.5" fill="#111" opacity="0.8"/>
+<circle cx="8" cy="-12" r="2.5" fill="#111" opacity="0.8"/>
+<circle cx="-7" cy="-13" r="0.8" fill="white" opacity="0.7"/>
+<circle cx="9" cy="-13" r="0.8" fill="white" opacity="0.7"/>
+<line x1="-12" y1="-20" x2="-17" y2="-32" stroke="#3DDC84" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="12" y1="-20" x2="17" y2="-32" stroke="#3DDC84" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="-17" cy="-32" r="1.5" fill="#3DDC84"/>
+<circle cx="17" cy="-32" r="1.5" fill="#3DDC84"/>
+<rect x="-15" y="38" width="12" height="16" rx="6" fill="#3DDC84"/>
+<rect x="3" y="38" width="12" height="16" rx="6" fill="#3DDC84"/>
+<g style="animation:bubPop 0.5s ease-out 1.2s both">
+<rect x="-73" y="-52" width="36" height="22" fill="white" rx="11" opacity="0.92" stroke="#3DDC84" stroke-width="0.5"/>
+<polygon points="-45,-30 -39,-30 -35,-22" fill="white" opacity="0.92"/>
+<text x="-55" y="-37" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#3DDC84" text-anchor="middle">Hi !</text>
+</g>
+</g></g></g>
 <g style="animation:cardIn 0.5s ease-out 0.1s both">
 <rect x="26" y="419" width="802" height="195" fill="black" opacity="0.25" rx="10" filter="url(#shadow)"/>
 <rect x="24" y="417" width="802" height="195" fill="#161b22" rx="10" stroke="#21262d" stroke-width="1"/>
@@ -799,39 +832,45 @@
 <circle cx="566" cy="683" r="3.5" fill="#4285F4" opacity="0.6"/>
 <text x="576" y="687" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#e6edf3">OpenCV</text>
 </g>
-<text x="48" y="728" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#8b949e">Systems</text>
 <g style="animation:chipPop 0.35s ease-out 0.25s both">
+<rect x="641" y="670" width="77" height="26" fill="#4285F4" opacity="0.1" rx="13"/>
+<rect x="641" y="670" width="77" height="26" fill="none" stroke="#4285F4" stroke-width="0.8" opacity="0.3" rx="13"/>
+<circle cx="653" cy="683" r="3.5" fill="#4285F4" opacity="0.6"/>
+<text x="663" y="687" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#e6edf3">Kaggle</text>
+</g>
+<text x="48" y="728" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#8b949e">Systems</text>
+<g style="animation:chipPop 0.35s ease-out 0.30s both">
 <rect x="129" y="712" width="53" height="26" fill="#EA4335" opacity="0.1" rx="13"/>
 <rect x="129" y="712" width="53" height="26" fill="none" stroke="#EA4335" stroke-width="0.8" opacity="0.3" rx="13"/>
 <circle cx="141" cy="725" r="3.5" fill="#EA4335" opacity="0.6"/>
 <text x="151" y="729" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#e6edf3">C++</text>
 </g>
-<g style="animation:chipPop 0.35s ease-out 0.30s both">
+<g style="animation:chipPop 0.35s ease-out 0.35s both">
 <rect x="192" y="712" width="61" height="26" fill="#34A853" opacity="0.1" rx="13"/>
 <rect x="192" y="712" width="61" height="26" fill="none" stroke="#34A853" stroke-width="0.8" opacity="0.3" rx="13"/>
 <circle cx="204" cy="725" r="3.5" fill="#34A853" opacity="0.6"/>
 <text x="214" y="729" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#e6edf3">CUDA</text>
 </g>
-<g style="animation:chipPop 0.35s ease-out 0.35s both">
+<g style="animation:chipPop 0.35s ease-out 0.40s both">
 <rect x="264" y="712" width="69" height="26" fill="#FBBC05" opacity="0.1" rx="13"/>
 <rect x="264" y="712" width="69" height="26" fill="none" stroke="#FBBC05" stroke-width="0.8" opacity="0.3" rx="13"/>
 <circle cx="276" cy="725" r="3.5" fill="#FBBC05" opacity="0.6"/>
 <text x="286" y="729" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#e6edf3">Linux</text>
 </g>
 <text x="48" y="770" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#8b949e">Mobile</text>
-<g style="animation:chipPop 0.35s ease-out 0.40s both">
+<g style="animation:chipPop 0.35s ease-out 0.45s both">
 <rect x="129" y="754" width="85" height="26" fill="#4285F4" opacity="0.1" rx="13"/>
 <rect x="129" y="754" width="85" height="26" fill="none" stroke="#4285F4" stroke-width="0.8" opacity="0.3" rx="13"/>
 <circle cx="141" cy="767" r="3.5" fill="#4285F4" opacity="0.6"/>
 <text x="151" y="771" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#e6edf3">Flutter</text>
 </g>
-<g style="animation:chipPop 0.35s ease-out 0.45s both">
+<g style="animation:chipPop 0.35s ease-out 0.50s both">
 <rect x="224" y="754" width="61" height="26" fill="#34A853" opacity="0.1" rx="13"/>
 <rect x="224" y="754" width="61" height="26" fill="none" stroke="#34A853" stroke-width="0.8" opacity="0.3" rx="13"/>
 <circle cx="236" cy="767" r="3.5" fill="#34A853" opacity="0.6"/>
 <text x="246" y="771" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#e6edf3">Dart</text>
 </g>
-<g style="animation:chipPop 0.35s ease-out 0.50s both">
+<g style="animation:chipPop 0.35s ease-out 0.55s both">
 <rect x="295" y="754" width="85" height="26" fill="#EA4335" opacity="0.1" rx="13"/>
 <rect x="295" y="754" width="85" height="26" fill="none" stroke="#EA4335" stroke-width="0.8" opacity="0.3" rx="13"/>
 <circle cx="307" cy="767" r="3.5" fill="#EA4335" opacity="0.6"/>
