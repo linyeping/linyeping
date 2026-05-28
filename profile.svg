@@ -34,14 +34,14 @@
 @keyframes wave{0%,100%{transform:translate(0,0)}15%{transform:translate(5px,-14px)}35%{transform:translate(0,-2px)}55%{transform:translate(5px,-14px)}75%{transform:translate(0,0)}}
 @keyframes peekBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 @keyframes bubPop{0%{opacity:0;transform:scale(0.5)}60%{opacity:1;transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
-@keyframes gd0{0%{opacity:0.15}0%{opacity:0.15}2%{opacity:1}18%{opacity:1}20%{opacity:0.15}100%{opacity:0.15}}
-@keyframes gd1{0%{opacity:0.15}25%{opacity:0.15}27%{opacity:1}43%{opacity:1}45%{opacity:0.15}100%{opacity:0.15}}
-@keyframes gd2{0%{opacity:0.15}50%{opacity:0.15}52%{opacity:1}68%{opacity:1}70%{opacity:0.15}100%{opacity:0.15}}
-@keyframes gd3{0%{opacity:0.15}75%{opacity:0.15}77%{opacity:1}92%{opacity:1}94%{opacity:0.15}100%{opacity:0.15}}
-.gd0{animation:gd0 2.4s ease-in-out infinite}
-.gd1{animation:gd1 2.4s ease-in-out infinite}
-.gd2{animation:gd2 2.4s ease-in-out infinite}
-.gd3{animation:gd3 2.4s ease-in-out infinite}
+@keyframes gd0{0%{opacity:1}8%{opacity:0.7}17%{opacity:0.3}25%{opacity:0.15}75%{opacity:0.15}83%{opacity:0.3}92%{opacity:0.7}100%{opacity:1}}
+@keyframes gd1{0%{opacity:0.3}8%{opacity:0.15}17%{opacity:0.3}20%{opacity:0.7}25%{opacity:1}30%{opacity:0.7}33%{opacity:0.3}42%{opacity:0.15}100%{opacity:0.15}}
+@keyframes gd2{0%{opacity:0.15}25%{opacity:0.15}33%{opacity:0.15}42%{opacity:0.3}45%{opacity:0.7}50%{opacity:1}55%{opacity:0.7}58%{opacity:0.3}67%{opacity:0.15}100%{opacity:0.15}}
+@keyframes gd3{0%{opacity:0.15}50%{opacity:0.15}58%{opacity:0.15}67%{opacity:0.3}70%{opacity:0.7}75%{opacity:1}80%{opacity:0.7}83%{opacity:0.3}92%{opacity:0.15}100%{opacity:0.15}}
+.gd0{animation:gd0 3s ease-in-out infinite}
+.gd1{animation:gd1 3s ease-in-out infinite}
+.gd2{animation:gd2 3s ease-in-out infinite}
+.gd3{animation:gd3 3s ease-in-out infinite}
 </style>
 <defs>
 <linearGradient id="mainBg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0d1117"/><stop offset="50%" stop-color="#10151c"/><stop offset="100%" stop-color="#0d1117"/></linearGradient>
@@ -717,35 +717,31 @@
 <text x="44" y="386" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="400" fill="#e6edf3" style="animation:typeIn 0.4s ease-out 0.48s both">> Interested in CUDA kernel dev and GPU optimization</text>
 <rect x="44" y="398" width="7" height="13" fill="#4285F4" opacity="0.8" style="animation:blink 1.2s step-end infinite"/>
 </g>
-<g clip-path="url(#edgeClip)">
-<g transform="translate(850,321)">
+<g transform="translate(816,331)">
 <g style="animation:peekBob 3s ease-in-out infinite">
-<circle cx="0" cy="15" r="42" fill="#3DDC84" opacity="0.035"/>
-<rect x="26" y="3" width="10" height="26" rx="5" fill="#3DDC84"/>
+<circle cx="0" cy="10" r="35" fill="#3DDC84" opacity="0.06"/>
+<rect x="20" y="2" width="8" height="22" rx="4" fill="#3DDC84"/>
 <g style="animation:wave 2s ease-in-out infinite">
-<rect x="-36" y="3" width="10" height="26" rx="5" fill="#3DDC84"/>
+<rect x="-28" y="2" width="8" height="22" rx="4" fill="#3DDC84"/>
 </g>
-<rect x="-22" y="0" width="44" height="36" rx="7" fill="#3DDC84"/>
-<circle cx="-8" cy="16" r="7" fill="#FBBC05" opacity="0.9"/>
-<circle cx="-8" cy="16" r="5.5" fill="#F4B400"/>
-<text x="-8" y="19.5" font-family="Google Sans,sans-serif" font-size="8" font-weight="700" fill="white" text-anchor="middle">K</text>
-<path d="M-24,-2 A24,22 0 0,1 24,-2 Z" fill="#3DDC84"/>
-<circle cx="-8" cy="-12" r="2.5" fill="#111" opacity="0.8"/>
-<circle cx="8" cy="-12" r="2.5" fill="#111" opacity="0.8"/>
-<circle cx="-7" cy="-13" r="0.8" fill="white" opacity="0.7"/>
-<circle cx="9" cy="-13" r="0.8" fill="white" opacity="0.7"/>
-<line x1="-12" y1="-20" x2="-17" y2="-32" stroke="#3DDC84" stroke-width="2.5" stroke-linecap="round"/>
-<line x1="12" y1="-20" x2="17" y2="-32" stroke="#3DDC84" stroke-width="2.5" stroke-linecap="round"/>
-<circle cx="-17" cy="-32" r="1.5" fill="#3DDC84"/>
-<circle cx="17" cy="-32" r="1.5" fill="#3DDC84"/>
-<rect x="-15" y="38" width="12" height="16" rx="6" fill="#3DDC84"/>
-<rect x="3" y="38" width="12" height="16" rx="6" fill="#3DDC84"/>
+<rect x="-18" y="0" width="36" height="30" rx="6" fill="#3DDC84"/>
+<circle cx="0" cy="-1" r="20" fill="#3DDC84"/>
+<rect x="-18" y="-1" width="36" height="5" fill="#3DDC84"/>
+<circle cx="-7" cy="-10" r="2.2" fill="white"/>
+<circle cx="7" cy="-10" r="2.2" fill="white"/>
+<line x1="-9" y1="-18" x2="-14" y2="-28" stroke="#3DDC84" stroke-width="2" stroke-linecap="round"/>
+<line x1="9" y1="-18" x2="14" y2="-28" stroke="#3DDC84" stroke-width="2" stroke-linecap="round"/>
+<rect x="-12" y="32" width="10" height="14" rx="5" fill="#3DDC84"/>
+<rect x="2" y="32" width="10" height="14" rx="5" fill="#3DDC84"/>
+<circle cx="0" cy="13" r="6.5" fill="#FBBC05" opacity="0.95"/>
+<circle cx="0" cy="13" r="5" fill="#F4B400"/>
+<text x="0" y="16" font-family="Google Sans,sans-serif" font-size="8" font-weight="700" fill="white" text-anchor="middle">K</text>
 <g style="animation:bubPop 0.5s ease-out 1.2s both">
-<rect x="-73" y="-52" width="36" height="22" fill="white" rx="11" opacity="0.92" stroke="#3DDC84" stroke-width="0.5"/>
-<polygon points="-45,-30 -39,-30 -35,-22" fill="white" opacity="0.92"/>
-<text x="-55" y="-37" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="#3DDC84" text-anchor="middle">Hi !</text>
+<rect x="-47" y="-43" width="30" height="18" fill="white" rx="9" opacity="0.92" stroke="#3DDC84" stroke-width="0.6"/>
+<polygon points="-24,-25 -19,-25 -16,-18" fill="white" opacity="0.92"/>
+<text x="-32" y="-30" font-family="Google Sans,Segoe UI,sans-serif" font-size="10" font-weight="700" fill="#3DDC84" text-anchor="middle">Hi!</text>
 </g>
-</g></g></g>
+</g></g>
 <g style="animation:cardIn 0.5s ease-out 0.1s both">
 <rect x="26" y="419" width="802" height="195" fill="black" opacity="0.25" rx="10" filter="url(#shadow)"/>
 <rect x="24" y="417" width="802" height="195" fill="#161b22" rx="10" stroke="#21262d" stroke-width="1"/>
