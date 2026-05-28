@@ -679,19 +679,24 @@
 <rect x="535" y="55" width="2.5" height="36" rx="1" fill="#4285F4" style="animation:blink 1.2s step-end infinite"/>
 <text x="281" y="88" font-family="JetBrains Mono,Fira Code,monospace" font-size="46" font-weight="300" fill="#4285F4" opacity="0.3" filter="url(#glow2)">&lt;</text>
 <text x="543" y="88" font-family="JetBrains Mono,Fira Code,monospace" font-size="46" font-weight="300" fill="#34A853" opacity="0.3" filter="url(#glow2)">/&gt;</text>
-<text x="425.0" y="117" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#8b949e" text-anchor="middle" opacity="0.7">build something interesting, Why not?</text>
-<rect x="198" y="140" width="100" height="24" fill="#4285F4" opacity="0.1" rx="12"/>
-<rect x="198" y="140" width="100" height="24" fill="none" stroke="#4285F4" stroke-width="0.8" opacity="0.35" rx="12"/>
-<text x="248" y="156" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#4285F4" text-anchor="middle">CS Junior</text>
-<rect x="308" y="140" width="84" height="24" fill="#EA4335" opacity="0.1" rx="12"/>
-<rect x="308" y="140" width="84" height="24" fill="none" stroke="#EA4335" stroke-width="0.8" opacity="0.35" rx="12"/>
-<text x="350" y="156" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#EA4335" text-anchor="middle">ML / DL</text>
-<rect x="402" y="140" width="116" height="24" fill="#FBBC05" opacity="0.1" rx="12"/>
-<rect x="402" y="140" width="116" height="24" fill="none" stroke="#FBBC05" stroke-width="0.8" opacity="0.35" rx="12"/>
-<text x="460" y="156" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#FBBC05" text-anchor="middle">Flutter Dev</text>
-<rect x="528" y="140" width="124" height="24" fill="#34A853" opacity="0.1" rx="12"/>
-<rect x="528" y="140" width="124" height="24" fill="none" stroke="#34A853" stroke-width="0.8" opacity="0.35" rx="12"/>
-<text x="590" y="156" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#34A853" text-anchor="middle">On-Device AI</text>
+<text x="425.0" y="113" font-family="Google Sans,Segoe UI,sans-serif" font-size="14" fill="#8b949e" text-anchor="middle" opacity="0.5" style="animation:fadeUp 0.6s ease-out 0.3s both">
+<tspan fill="#4285F4">盛</tspan><tspan fill="#EA4335"> 伟</tspan>
+<tspan fill="#8b949e" opacity="0.4">  /  </tspan>
+<tspan fill="#8b949e">Sheng Wei</tspan>
+</text>
+<text x="425.0" y="131" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#8b949e" text-anchor="middle" opacity="0.5">build something interesting, Why not?</text>
+<rect x="198" y="153" width="100" height="24" fill="#4285F4" opacity="0.1" rx="12"/>
+<rect x="198" y="153" width="100" height="24" fill="none" stroke="#4285F4" stroke-width="0.8" opacity="0.35" rx="12"/>
+<text x="248" y="169" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#4285F4" text-anchor="middle">CS Junior</text>
+<rect x="308" y="153" width="84" height="24" fill="#EA4335" opacity="0.1" rx="12"/>
+<rect x="308" y="153" width="84" height="24" fill="none" stroke="#EA4335" stroke-width="0.8" opacity="0.35" rx="12"/>
+<text x="350" y="169" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#EA4335" text-anchor="middle">ML / DL</text>
+<rect x="402" y="153" width="116" height="24" fill="#FBBC05" opacity="0.1" rx="12"/>
+<rect x="402" y="153" width="116" height="24" fill="none" stroke="#FBBC05" stroke-width="0.8" opacity="0.35" rx="12"/>
+<text x="460" y="169" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#FBBC05" text-anchor="middle">Flutter Dev</text>
+<rect x="528" y="153" width="124" height="24" fill="#34A853" opacity="0.1" rx="12"/>
+<rect x="528" y="153" width="124" height="24" fill="none" stroke="#34A853" stroke-width="0.8" opacity="0.35" rx="12"/>
+<text x="590" y="169" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#34A853" text-anchor="middle">On-Device AI</text>
 <circle cx="404" cy="225" r="3.5" fill="#4285F4" class="gd0"/>
 <circle cx="418" cy="225" r="3.5" fill="#EA4335" class="gd1"/>
 <circle cx="432" cy="225" r="3.5" fill="#FBBC05" class="gd2"/>
@@ -713,7 +718,6 @@
 <text x="44" y="346" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="400" fill="#e6edf3" style="animation:typeIn 0.4s ease-out 0.24s both">> NLP, Computer Vision, Flutter Android Developer</text>
 <text x="44" y="366" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="400" fill="#e6edf3" style="animation:typeIn 0.4s ease-out 0.36s both">> Exploring on-device LLM and AI Agents on mobile</text>
 <text x="44" y="386" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="400" fill="#e6edf3" style="animation:typeIn 0.4s ease-out 0.48s both">> Interested in CUDA kernel dev and GPU optimization</text>
-<rect x="44" y="398" width="2" height="14" fill="#4285F4" opacity="0.6" rx="1" style="animation:blink 1.2s step-end infinite"/>
 </g>
 <g style="animation:peekBob 3s ease-in-out infinite">
 <circle cx="814" cy="338" r="35" fill="#3DDC84" opacity="0.06"/>
