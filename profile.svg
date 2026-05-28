@@ -703,45 +703,42 @@
 <g style="animation:cardIn 0.5s ease-out both">
 <rect x="26" y="258" width="802" height="145" fill="black" opacity="0.25" rx="10" filter="url(#shadow)"/>
 <rect x="24" y="256" width="802" height="145" fill="#161b22" rx="10" stroke="#21262d" stroke-width="1"/>
-<rect x="24" y="256" width="802" height="28" fill="#0d1117" rx="10"/>
-<rect x="24" y="276" width="802" height="10" fill="#0d1117"/>
 <line x1="24" y1="284" x2="826" y2="284" stroke="#21262d" stroke-width="0.5"/>
-<circle cx="42" cy="270" r="5" fill="#FF5F57"/>
-<circle cx="58" cy="270" r="5" fill="#FEBC2E"/>
-<circle cx="74" cy="270" r="5" fill="#28C840"/>
-<text x="425.0" y="274" font-family="monospace" font-size="11" fill="#8b949e" text-anchor="middle">~/linyeping</text>
+<circle cx="42" cy="270" r="4.5" fill="#FF5F57"/>
+<circle cx="58" cy="270" r="4.5" fill="#FEBC2E"/>
+<circle cx="74" cy="270" r="4.5" fill="#28C840"/>
+<text x="425.0" y="274" font-family="monospace" font-size="10" fill="#8b949e" text-anchor="middle" opacity="0.6">linyeping@github ~ </text>
 <text x="44" y="306" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="700" fill="#34A853" style="animation:typeIn 0.4s ease-out 0.00s both">$ whoami</text>
 <text x="44" y="326" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="400" fill="#e6edf3" style="animation:typeIn 0.4s ease-out 0.12s both">> CS Undergraduate (Junior) | ML and DL Focus</text>
 <text x="44" y="346" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="400" fill="#e6edf3" style="animation:typeIn 0.4s ease-out 0.24s both">> NLP, Computer Vision, Flutter Android Developer</text>
 <text x="44" y="366" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="400" fill="#e6edf3" style="animation:typeIn 0.4s ease-out 0.36s both">> Exploring on-device LLM and AI Agents on mobile</text>
 <text x="44" y="386" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="400" fill="#e6edf3" style="animation:typeIn 0.4s ease-out 0.48s both">> Interested in CUDA kernel dev and GPU optimization</text>
-<rect x="44" y="398" width="7" height="13" fill="#4285F4" opacity="0.8" style="animation:blink 1.2s step-end infinite"/>
+<rect x="44" y="398" width="2" height="14" fill="#4285F4" opacity="0.6" rx="1" style="animation:blink 1.2s step-end infinite"/>
 </g>
-<g transform="translate(816,331)">
 <g style="animation:peekBob 3s ease-in-out infinite">
-<circle cx="0" cy="10" r="35" fill="#3DDC84" opacity="0.06"/>
-<rect x="20" y="2" width="8" height="22" rx="4" fill="#3DDC84"/>
+<circle cx="814" cy="338" r="35" fill="#3DDC84" opacity="0.06"/>
+<rect x="834" y="330" width="8" height="22" rx="4" fill="#3DDC84"/>
 <g style="animation:wave 2s ease-in-out infinite">
-<rect x="-28" y="2" width="8" height="22" rx="4" fill="#3DDC84"/>
+<rect x="786" y="330" width="8" height="22" rx="4" fill="#3DDC84"/>
 </g>
-<rect x="-18" y="0" width="36" height="30" rx="6" fill="#3DDC84"/>
-<circle cx="0" cy="-1" r="20" fill="#3DDC84"/>
-<rect x="-18" y="-1" width="36" height="5" fill="#3DDC84"/>
-<circle cx="-7" cy="-10" r="2.2" fill="white"/>
-<circle cx="7" cy="-10" r="2.2" fill="white"/>
-<line x1="-9" y1="-18" x2="-14" y2="-28" stroke="#3DDC84" stroke-width="2" stroke-linecap="round"/>
-<line x1="9" y1="-18" x2="14" y2="-28" stroke="#3DDC84" stroke-width="2" stroke-linecap="round"/>
-<rect x="-12" y="32" width="10" height="14" rx="5" fill="#3DDC84"/>
-<rect x="2" y="32" width="10" height="14" rx="5" fill="#3DDC84"/>
-<circle cx="0" cy="13" r="6.5" fill="#FBBC05" opacity="0.95"/>
-<circle cx="0" cy="13" r="5" fill="#F4B400"/>
-<text x="0" y="16" font-family="Google Sans,sans-serif" font-size="8" font-weight="700" fill="white" text-anchor="middle">K</text>
+<rect x="796" y="328" width="36" height="30" rx="6" fill="#3DDC84"/>
+<circle cx="814" cy="327" r="20" fill="#3DDC84"/>
+<rect x="796" y="327" width="36" height="5" fill="#3DDC84"/>
+<circle cx="807" cy="318" r="2.2" fill="white"/>
+<circle cx="821" cy="318" r="2.2" fill="white"/>
+<line x1="805" y1="310" x2="800" y2="300" stroke="#3DDC84" stroke-width="2" stroke-linecap="round"/>
+<line x1="823" y1="310" x2="828" y2="300" stroke="#3DDC84" stroke-width="2" stroke-linecap="round"/>
+<rect x="802" y="360" width="10" height="14" rx="5" fill="#3DDC84"/>
+<rect x="816" y="360" width="10" height="14" rx="5" fill="#3DDC84"/>
+<circle cx="814" cy="341" r="6.5" fill="#FBBC05" opacity="0.95"/>
+<circle cx="814" cy="341" r="5" fill="#F4B400"/>
+<text x="814" y="344" font-family="Google Sans,sans-serif" font-size="8" font-weight="700" fill="white" text-anchor="middle">K</text>
 <g style="animation:bubPop 0.5s ease-out 1.2s both">
-<rect x="-47" y="-43" width="30" height="18" fill="white" rx="9" opacity="0.92" stroke="#3DDC84" stroke-width="0.6"/>
-<polygon points="-24,-25 -19,-25 -16,-18" fill="white" opacity="0.92"/>
-<text x="-32" y="-30" font-family="Google Sans,Segoe UI,sans-serif" font-size="10" font-weight="700" fill="#3DDC84" text-anchor="middle">Hi!</text>
+<rect x="767" y="285" width="30" height="18" fill="white" rx="9" opacity="0.92" stroke="#3DDC84" stroke-width="0.6"/>
+<polygon points="790,303 795,303 798,310" fill="white" opacity="0.92"/>
+<text x="782" y="298" font-family="Google Sans,Segoe UI,sans-serif" font-size="10" font-weight="700" fill="#3DDC84" text-anchor="middle">Hi!</text>
 </g>
-</g></g>
+</g>
 <g style="animation:cardIn 0.5s ease-out 0.1s both">
 <rect x="26" y="419" width="802" height="195" fill="black" opacity="0.25" rx="10" filter="url(#shadow)"/>
 <rect x="24" y="417" width="802" height="195" fill="#161b22" rx="10" stroke="#21262d" stroke-width="1"/>
