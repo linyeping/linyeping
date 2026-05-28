@@ -253,7 +253,7 @@ def build():
     s.append(f'<text x="{nx}" y="{ny+46}" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="{T2}" text-anchor="middle" opacity="0.5">build something interesting, Why not?</text>')
 
     # Role chips
-    roles = [("CS Junior", G[0]), ("ML / DL", G[1]), ("Flutter Dev", G[2]), ("On-Device AI", G[3])]
+    roles = [("AI Undergraduate", G[0]), ("ML / DL", G[1]), ("Flutter Dev", G[2]), ("On-Device AI", G[3])]
     role_y = ny + 68
     total_rw = sum(len(r)*8+28 for r,_ in roles) + 10*(len(roles)-1)
     rx = nx - total_rw/2
@@ -285,7 +285,7 @@ def build():
 
     lines_data = [
         ("$ whoami", "#34A853", True),
-        ("> CS Undergraduate (Junior) | ML and DL Focus", T1, False),
+        ("> AI Undergraduate | ML and DL Focus", T1, False),
         ("> NLP, Computer Vision, Flutter Android Developer", T1, False),
         ("> Exploring on-device LLM and AI Agents on mobile", T1, False),
         ("> Interested in CUDA kernel dev and GPU optimization", T1, False),
