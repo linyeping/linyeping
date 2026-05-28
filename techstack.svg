@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 280" width="100%">
+<style>
+@keyframes chipIn{0%{opacity:0;transform:scale(0.8)}100%{opacity:1;transform:scale(1)}}
+@keyframes chipHover{0%,100%{filter:brightness(1)}50%{filter:brightness(1.2)}}
+</style>
+<rect width="850" height="280" fill="#0d1117" rx="8"/>
+<text x="24" y="30" font-family="Google Sans,Segoe UI,sans-serif" font-size="16" font-weight="600" fill="#FBBC05">Tech Stack</text>
+<circle cx="810" cy="26" r="2.5" fill="#4285F4" opacity="0.5"/>
+<circle cx="820" cy="26" r="2.5" fill="#EA4335" opacity="0.5"/>
+<circle cx="830" cy="26" r="2.5" fill="#FBBC05" opacity="0.5"/>
+<circle cx="840" cy="26" r="2.5" fill="#34A853" opacity="0.5"/>
+<text x="32" y="71" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#8b949e" font-weight="500">AI / ML</text>
+<g style="animation:chipIn 0.4s ease-out 0.00s both,chipHover 6.0s ease-in-out 0.0s infinite">
+<rect x="140" y="55" width="79" height="30" fill="#4285F4" opacity="0.12" rx="15"/>
+<rect x="140" y="55" width="79" height="30" fill="none" stroke="#4285F4" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="154" cy="70" r="4" fill="#4285F4" opacity="0.7"/>
+<text x="164" y="74" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">Python</text>
+</g>
+<g style="animation:chipIn 0.4s ease-out 0.06s both,chipHover 6.3s ease-in-out 0.1s infinite">
+<rect x="231" y="55" width="88" height="30" fill="#EA4335" opacity="0.12" rx="15"/>
+<rect x="231" y="55" width="88" height="30" fill="none" stroke="#EA4335" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="245" cy="70" r="4" fill="#EA4335" opacity="0.7"/>
+<text x="255" y="74" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">PyTorch</text>
+</g>
+<g style="animation:chipIn 0.4s ease-out 0.12s both,chipHover 6.6s ease-in-out 0.1s infinite">
+<rect x="330" y="55" width="113" height="30" fill="#FBBC05" opacity="0.12" rx="15"/>
+<rect x="330" y="55" width="113" height="30" fill="none" stroke="#FBBC05" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="344" cy="70" r="4" fill="#FBBC05" opacity="0.7"/>
+<text x="354" y="74" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">TensorFlow</text>
+</g>
+<g style="animation:chipIn 0.4s ease-out 0.18s both,chipHover 6.9s ease-in-out 0.2s infinite">
+<rect x="456" y="55" width="122" height="30" fill="#34A853" opacity="0.12" rx="15"/>
+<rect x="456" y="55" width="122" height="30" fill="none" stroke="#34A853" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="470" cy="70" r="4" fill="#34A853" opacity="0.7"/>
+<text x="480" y="74" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">HuggingFace</text>
+</g>
+<g style="animation:chipIn 0.4s ease-out 0.24s both,chipHover 7.2s ease-in-out 0.2s infinite">
+<rect x="589" y="55" width="79" height="30" fill="#4285F4" opacity="0.12" rx="15"/>
+<rect x="589" y="55" width="79" height="30" fill="none" stroke="#4285F4" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="603" cy="70" r="4" fill="#4285F4" opacity="0.7"/>
+<text x="613" y="74" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">OpenCV</text>
+</g>
+<text x="32" y="146" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#8b949e" font-weight="500">Systems & GPU</text>
+<g style="animation:chipIn 0.4s ease-out 0.30s both,chipHover 7.5s ease-in-out 0.3s infinite">
+<rect x="140" y="130" width="54" height="30" fill="#EA4335" opacity="0.12" rx="15"/>
+<rect x="140" y="130" width="54" height="30" fill="none" stroke="#EA4335" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="154" cy="145" r="4" fill="#EA4335" opacity="0.7"/>
+<text x="164" y="149" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">C++</text>
+</g>
+<g style="animation:chipIn 0.4s ease-out 0.36s both,chipHover 7.8s ease-in-out 0.4s infinite">
+<rect x="206" y="130" width="62" height="30" fill="#34A853" opacity="0.12" rx="15"/>
+<rect x="206" y="130" width="62" height="30" fill="none" stroke="#34A853" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="220" cy="145" r="4" fill="#34A853" opacity="0.7"/>
+<text x="230" y="149" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">CUDA</text>
+</g>
+<g style="animation:chipIn 0.4s ease-out 0.42s both,chipHover 8.1s ease-in-out 0.4s infinite">
+<rect x="280" y="130" width="70" height="30" fill="#FBBC05" opacity="0.12" rx="15"/>
+<rect x="280" y="130" width="70" height="30" fill="none" stroke="#FBBC05" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="294" cy="145" r="4" fill="#FBBC05" opacity="0.7"/>
+<text x="304" y="149" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">Linux</text>
+</g>
+<text x="32" y="221" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#8b949e" font-weight="500">Mobile & App</text>
+<g style="animation:chipIn 0.4s ease-out 0.48s both,chipHover 8.4s ease-in-out 0.5s infinite">
+<rect x="140" y="205" width="88" height="30" fill="#4285F4" opacity="0.12" rx="15"/>
+<rect x="140" y="205" width="88" height="30" fill="none" stroke="#4285F4" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="154" cy="220" r="4" fill="#4285F4" opacity="0.7"/>
+<text x="164" y="224" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">Flutter</text>
+</g>
+<g style="animation:chipIn 0.4s ease-out 0.54s both,chipHover 8.7s ease-in-out 0.5s infinite">
+<rect x="240" y="205" width="62" height="30" fill="#34A853" opacity="0.12" rx="15"/>
+<rect x="240" y="205" width="62" height="30" fill="none" stroke="#34A853" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="254" cy="220" r="4" fill="#34A853" opacity="0.7"/>
+<text x="264" y="224" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">Dart</text>
+</g>
+<g style="animation:chipIn 0.4s ease-out 0.60s both,chipHover 9.0s ease-in-out 0.6s infinite">
+<rect x="314" y="205" width="88" height="30" fill="#EA4335" opacity="0.12" rx="15"/>
+<rect x="314" y="205" width="88" height="30" fill="none" stroke="#EA4335" stroke-width="1" opacity="0.35" rx="15"/>
+<circle cx="328" cy="220" r="4" fill="#EA4335" opacity="0.7"/>
+<text x="338" y="224" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#e6edf3" font-weight="500">Android</text>
+</g>
+</svg>

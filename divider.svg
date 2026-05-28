@@ -1,13 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 6" width="100%">
-<style>
-@keyframes shimmer0{0%,100%{opacity:0.6}50%{opacity:1}}
-@keyframes shimmer1{0%,100%{opacity:0.5}50%{opacity:0.95}}
-@keyframes shimmer2{0%,100%{opacity:0.55}50%{opacity:1}}
-@keyframes shimmer3{0%,100%{opacity:0.5}50%{opacity:0.9}}
-@keyframes slideIn{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
-</style>
-<rect x="0" y="0" width="212" height="6" fill="#4285F4" rx="0" style="transform-origin:0px center;animation:slideIn 0.6s ease-out 0.00s both,shimmer0 3.0s ease-in-out 0.0s infinite"/>
-<rect x="212" y="0" width="212" height="6" fill="#EA4335" rx="0" style="transform-origin:212px center;animation:slideIn 0.6s ease-out 0.15s both,shimmer1 3.5s ease-in-out 0.1s infinite"/>
-<rect x="425" y="0" width="212" height="6" fill="#FBBC05" rx="0" style="transform-origin:425px center;animation:slideIn 0.6s ease-out 0.30s both,shimmer2 4.0s ease-in-out 0.3s infinite"/>
-<rect x="638" y="0" width="212" height="6" fill="#34A853" rx="0" style="transform-origin:638px center;animation:slideIn 0.6s ease-out 0.45s both,shimmer3 4.5s ease-in-out 0.4s infinite"/>
+<style>@keyframes s0{0%,100%{opacity:0.6}50%{opacity:1}}@keyframes s1{0%,100%{opacity:0.5}50%{opacity:0.95}}@keyframes s2{0%,100%{opacity:0.55}50%{opacity:1}}@keyframes s3{0%,100%{opacity:0.5}50%{opacity:0.9}}@keyframes si{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}</style>
+<rect x="0" y="0" width="212" height="6" fill="#4285F4" style="transform-origin:0px center;animation:si 0.6s ease-out 0.00s both,s0 3.0s ease-in-out infinite"/>
+<rect x="212" y="0" width="212" height="6" fill="#EA4335" style="transform-origin:212px center;animation:si 0.6s ease-out 0.15s both,s1 3.5s ease-in-out infinite"/>
+<rect x="425" y="0" width="212" height="6" fill="#FBBC05" style="transform-origin:425px center;animation:si 0.6s ease-out 0.30s both,s2 4.0s ease-in-out infinite"/>
+<rect x="638" y="0" width="212" height="6" fill="#34A853" style="transform-origin:638px center;animation:si 0.6s ease-out 0.45s both,s3 4.5s ease-in-out infinite"/>
 </svg>

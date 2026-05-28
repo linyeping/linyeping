@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 240" width="100%">
+<style>@keyframes cardIn{0%{opacity:0;transform:translateY(15px)}100%{opacity:1;transform:translateY(0)}}</style>
+<rect width="850" height="240" fill="#0d1117" rx="8"/>
+<text x="24" y="30" font-family="Google Sans,Segoe UI,sans-serif" font-size="16" font-weight="600" fill="#EA4335">Research Interests</text>
+<circle cx="810" cy="26" r="2.5" fill="#4285F4" opacity="0.5"/>
+<circle cx="820" cy="26" r="2.5" fill="#EA4335" opacity="0.5"/>
+<circle cx="830" cy="26" r="2.5" fill="#FBBC05" opacity="0.5"/>
+<circle cx="840" cy="26" r="2.5" fill="#34A853" opacity="0.5"/>
+<g style="animation:cardIn 0.5s ease-out 0.00s both">
+<rect x="16" y="50" width="192" height="180" fill="#161b22" rx="6" stroke="#21262d" stroke-width="1"/>
+<rect x="16" y="50" width="192" height="4" fill="#4285F4" rx="2"/>
+<text x="112" y="80" font-family="Google Sans,Segoe UI,sans-serif" font-size="14" font-weight="600" fill="#e6edf3" text-anchor="middle">ML / DL</text>
+<line x1="28" y1="92" x2="196" y2="92" stroke="#4285F4" stroke-width="0.5" opacity="0.3"/>
+<rect x="94" y="112" width="37" height="22" fill="#4285F4" opacity="0.1" rx="11"/>
+<text x="112" y="127" font-family="monospace" font-size="11" fill="#4285F4" text-anchor="middle" opacity="0.9">NLP</text>
+<rect x="97" y="142" width="30" height="22" fill="#4285F4" opacity="0.1" rx="11"/>
+<text x="112" y="157" font-family="monospace" font-size="11" fill="#4285F4" text-anchor="middle" opacity="0.9">CV</text>
+<rect x="62" y="172" width="100" height="22" fill="#4285F4" opacity="0.1" rx="11"/>
+<text x="112" y="187" font-family="monospace" font-size="11" fill="#4285F4" text-anchor="middle" opacity="0.9">Transformers</text>
+<rect x="62" y="202" width="100" height="22" fill="#4285F4" opacity="0.1" rx="11"/>
+<text x="112" y="217" font-family="monospace" font-size="11" fill="#4285F4" text-anchor="middle" opacity="0.9">Optimization</text>
+</g>
+<g style="animation:cardIn 0.5s ease-out 0.10s both">
+<rect x="224" y="50" width="192" height="180" fill="#161b22" rx="6" stroke="#21262d" stroke-width="1"/>
+<rect x="224" y="50" width="192" height="4" fill="#EA4335" rx="2"/>
+<text x="321" y="80" font-family="Google Sans,Segoe UI,sans-serif" font-size="14" font-weight="600" fill="#e6edf3" text-anchor="middle">On-Device AI</text>
+<line x1="236" y1="92" x2="405" y2="92" stroke="#EA4335" stroke-width="0.5" opacity="0.3"/>
+<rect x="285" y="112" width="72" height="22" fill="#EA4335" opacity="0.1" rx="11"/>
+<text x="321" y="127" font-family="monospace" font-size="11" fill="#EA4335" text-anchor="middle" opacity="0.9">Edge LLM</text>
+<rect x="257" y="142" width="128" height="22" fill="#EA4335" opacity="0.1" rx="11"/>
+<text x="321" y="157" font-family="monospace" font-size="11" fill="#EA4335" text-anchor="middle" opacity="0.9">Mobile Inference</text>
+<rect x="271" y="172" width="100" height="22" fill="#EA4335" opacity="0.1" rx="11"/>
+<text x="321" y="187" font-family="monospace" font-size="11" fill="#EA4335" text-anchor="middle" opacity="0.9">Quantization</text>
+</g>
+<g style="animation:cardIn 0.5s ease-out 0.20s both">
+<rect x="433" y="50" width="192" height="180" fill="#161b22" rx="6" stroke="#21262d" stroke-width="1"/>
+<rect x="433" y="50" width="192" height="4" fill="#FBBC05" rx="2"/>
+<text x="529" y="80" font-family="Google Sans,Segoe UI,sans-serif" font-size="14" font-weight="600" fill="#e6edf3" text-anchor="middle">AI Agents</text>
+<line x1="445" y1="92" x2="614" y2="92" stroke="#FBBC05" stroke-width="0.5" opacity="0.3"/>
+<rect x="486" y="112" width="86" height="22" fill="#FBBC05" opacity="0.1" rx="11"/>
+<text x="529" y="127" font-family="monospace" font-size="11" fill="#FBBC05" text-anchor="middle" opacity="0.9">Autonomous</text>
+<rect x="493" y="142" width="72" height="22" fill="#FBBC05" opacity="0.1" rx="11"/>
+<text x="529" y="157" font-family="monospace" font-size="11" fill="#FBBC05" text-anchor="middle" opacity="0.9">Tool Use</text>
+<rect x="465" y="172" width="128" height="22" fill="#FBBC05" opacity="0.1" rx="11"/>
+<text x="529" y="187" font-family="monospace" font-size="11" fill="#FBBC05" text-anchor="middle" opacity="0.9">Agentic Workflow</text>
+</g>
+<g style="animation:cardIn 0.5s ease-out 0.30s both">
+<rect x="642" y="50" width="192" height="180" fill="#161b22" rx="6" stroke="#21262d" stroke-width="1"/>
+<rect x="642" y="50" width="192" height="4" fill="#34A853" rx="2"/>
+<text x="738" y="80" font-family="Google Sans,Segoe UI,sans-serif" font-size="14" font-weight="600" fill="#e6edf3" text-anchor="middle">CUDA / HPC</text>
+<line x1="654" y1="92" x2="822" y2="92" stroke="#34A853" stroke-width="0.5" opacity="0.3"/>
+<rect x="695" y="112" width="86" height="22" fill="#34A853" opacity="0.1" rx="11"/>
+<text x="738" y="127" font-family="monospace" font-size="11" fill="#34A853" text-anchor="middle" opacity="0.9">Kernel Dev</text>
+<rect x="705" y="142" width="65" height="22" fill="#34A853" opacity="0.1" rx="11"/>
+<text x="738" y="157" font-family="monospace" font-size="11" fill="#34A853" text-anchor="middle" opacity="0.9">GPU Opt</text>
+<rect x="684" y="172" width="107" height="22" fill="#34A853" opacity="0.1" rx="11"/>
+<text x="738" y="187" font-family="monospace" font-size="11" fill="#34A853" text-anchor="middle" opacity="0.9">Parallel Comp</text>
+</g>
+</svg>

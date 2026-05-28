@@ -11,10 +11,7 @@
 @keyframes pulse{0%,100%{opacity:0.5}50%{opacity:0.9}}
 @keyframes fadeSlow{0%{opacity:0}100%{opacity:1}}
 </style>
-<defs><linearGradient id="fbg" x1="0%" y1="0%" x2="100%" y2="100%">
-<stop offset="0%" stop-color="#0d1117"/><stop offset="50%" stop-color="#10151c"/><stop offset="100%" stop-color="#0d1117"/>
-</linearGradient></defs>
-<rect width="850" height="120" fill="url(#fbg)" rx="6"/>
+<rect width="850" height="120" fill="#0d1117" rx="6"/>
 <circle cx="0" cy="0" r="0.3" fill="#21262d" opacity="0.4"/>
 <circle cx="0" cy="40" r="0.3" fill="#21262d" opacity="0.4"/>
 <circle cx="0" cy="80" r="0.3" fill="#21262d" opacity="0.4"/>
@@ -160,10 +157,10 @@
 <line x1="730" y1="38" x2="686" y2="43" stroke="#EA4335" stroke-width="0.4" opacity="0.036" style="animation:pulse 6s ease-in-out infinite"/>
 <line x1="730" y1="38" x2="693" y2="107" stroke="#FBBC05" stroke-width="0.4" opacity="0.010" style="animation:pulse 6s ease-in-out infinite"/>
 <line x1="686" y1="43" x2="693" y2="107" stroke="#FBBC05" stroke-width="0.4" opacity="0.015" style="animation:pulse 6s ease-in-out infinite"/>
-<text x="425" y="50" font-family="Google Sans,Segoe UI,Arial,sans-serif" font-size="13" fill="#8b949e" text-anchor="middle" opacity="0.7" style="animation:fadeSlow 1s ease-out both">build something interesting, Why not?</text>
+<text x="425.0" y="50" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="#8b949e" text-anchor="middle" opacity="0.7" style="animation:fadeSlow 1s ease-out both">build something interesting, Why not?</text>
 <circle cx="404" cy="75" r="3" fill="#4285F4" opacity="0.7" style="animation:pulse 4s ease-in-out 0.0s infinite"/>
 <circle cx="418" cy="75" r="3" fill="#EA4335" opacity="0.7" style="animation:pulse 4s ease-in-out 0.3s infinite"/>
 <circle cx="432" cy="75" r="3" fill="#FBBC05" opacity="0.7" style="animation:pulse 4s ease-in-out 0.6s infinite"/>
 <circle cx="446" cy="75" r="3" fill="#34A853" opacity="0.7" style="animation:pulse 4s ease-in-out 0.9s infinite"/>
-<text x="425" y="105" font-family="monospace" font-size="10" fill="#484f58" text-anchor="middle" style="animation:fadeSlow 1.5s ease-out 0.5s both">Made with ❤️ and curiosity</text>
+<text x="425.0" y="105" font-family="monospace" font-size="10" fill="#484f58" text-anchor="middle" style="animation:fadeSlow 1.5s ease-out 0.5s both">Made with curiosity</text>
 </svg>

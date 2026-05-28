@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 190" width="100%">
+<style>@keyframes fadeRow{0%{opacity:0}100%{opacity:1}}</style>
+<rect width="850" height="190" fill="#0d1117" rx="8"/>
+<text x="24" y="30" font-family="Google Sans,Segoe UI,sans-serif" font-size="16" font-weight="600" fill="#4285F4">Publications</text>
+<circle cx="810" cy="26" r="2.5" fill="#4285F4" opacity="0.5"/>
+<circle cx="820" cy="26" r="2.5" fill="#EA4335" opacity="0.5"/>
+<circle cx="830" cy="26" r="2.5" fill="#FBBC05" opacity="0.5"/>
+<circle cx="840" cy="26" r="2.5" fill="#34A853" opacity="0.5"/>
+<text x="24" y="52" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#8b949e" font-style="italic">Papers currently under review - links will be added upon acceptance.</text>
+<rect x="16" y="64" width="818" height="24" fill="#161b22" rx="4"/>
+<text x="30" y="78" font-family="monospace" font-size="11" fill="#8b949e" font-weight="600">#</text>
+<text x="80" y="78" font-family="monospace" font-size="11" fill="#8b949e" font-weight="600">Title</text>
+<text x="550" y="78" font-family="monospace" font-size="11" fill="#8b949e" font-weight="600">Venue</text>
+<text x="680" y="78" font-family="monospace" font-size="11" fill="#8b949e" font-weight="600">Status</text>
+<text x="790" y="78" font-family="monospace" font-size="11" fill="#8b949e" font-weight="600">Link</text>
+<rect x="16" y="94" width="818" height="28" fill="#161b22" opacity="0.4" rx="2"/>
+<g style="animation:fadeRow 0.4s ease-out 0.00s both">
+<text x="30" y="108" font-family="monospace" font-size="12" fill="#8b949e">1</text>
+<text x="80" y="108" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#e6edf3" font-style="italic">Paper Title Placeholder</text>
+<text x="550" y="108" font-family="monospace" font-size="11" fill="#8b949e">-</text>
+<rect x="675" y="96" width="85" height="18" fill="#FBBC05" opacity="0.15" rx="9"/>
+<text x="717.5" y="108" font-family="monospace" font-size="10" fill="#FBBC05" text-anchor="middle">Under Review</text>
+<text x="790" y="108" font-family="monospace" font-size="11" fill="#8b949e">TBD</text>
+</g>
+<g style="animation:fadeRow 0.4s ease-out 0.10s both">
+<text x="30" y="138" font-family="monospace" font-size="12" fill="#8b949e">2</text>
+<text x="80" y="138" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#e6edf3" font-style="italic">Paper Title Placeholder</text>
+<text x="550" y="138" font-family="monospace" font-size="11" fill="#8b949e">-</text>
+<rect x="675" y="126" width="85" height="18" fill="#FBBC05" opacity="0.15" rx="9"/>
+<text x="717.5" y="138" font-family="monospace" font-size="10" fill="#FBBC05" text-anchor="middle">Under Review</text>
+<text x="790" y="138" font-family="monospace" font-size="11" fill="#8b949e">TBD</text>
+</g>
+<rect x="16" y="154" width="818" height="28" fill="#161b22" opacity="0.4" rx="2"/>
+<g style="animation:fadeRow 0.4s ease-out 0.20s both">
+<text x="30" y="168" font-family="monospace" font-size="12" fill="#8b949e">3</text>
+<text x="80" y="168" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="#e6edf3" font-style="italic">Paper Title Placeholder</text>
+<text x="550" y="168" font-family="monospace" font-size="11" fill="#8b949e">-</text>
+<rect x="675" y="156" width="85" height="18" fill="#FBBC05" opacity="0.15" rx="9"/>
+<text x="717.5" y="168" font-family="monospace" font-size="10" fill="#FBBC05" text-anchor="middle">Under Review</text>
+<text x="790" y="168" font-family="monospace" font-size="11" fill="#8b949e">TBD</text>
+</g>
+</svg>
