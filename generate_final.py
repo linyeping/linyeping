@@ -305,6 +305,11 @@ def dot_defs(T, prefix):
 # ============================================================
 # CARD SHELL
 # ============================================================
+PAD = 18   # card title left edge, relative to the card origin
+IN = 16    # inner block left edge, relative to the card origin
+COL = 108  # tech-stack category label column
+
+
 def card(T, x, y, w, h):
     # Opaque. At 0.93 alpha the dot field showed through nicely, but the
     # Kaggle card's text bled into the Publications header above it.
@@ -334,7 +339,7 @@ def build(theme_name):
     cw = W - CM * 2
 
     hdr_h, about_h, type_h, res_h = 250, 178, 74, 190
-    tech_h, proj_h, kag_h, pub_h, snake_h, ftr_h = 246, 212, 300, 232, 132, 66
+    tech_h, proj_h, kag_h, pub_h, snake_h, ftr_h = 246, 212, 300, 228, 132, 66
 
     total = (hdr_h + GAP + about_h + GAP + type_h + GAP + res_h + GAP + tech_h + GAP
              + proj_h + GAP + kag_h + GAP + pub_h + GAP + snake_h + GAP + ftr_h)
@@ -359,7 +364,7 @@ def build(theme_name):
 @keyframes {pre}caret{{0%,100%{{opacity:1}}50%{{opacity:0}}}}
 @keyframes {pre}tw{{0%{{clip-path:inset(0 100% 0 0)}}100%{{clip-path:inset(0 0 0 0)}}}}
 @keyframes {pre}cardin{{0%{{opacity:0;transform:translateY(10px)}}100%{{opacity:1;transform:translateY(0)}}}}
-@keyframes {pre}slide{{0%{{transform:translateX(0)}}50%{{transform:translateX(26px)}}100%{{transform:translateX(0)}}}}
+@keyframes {pre}slide{{0%{{transform:translateX(-13px)}}50%{{transform:translateX(13px)}}100%{{transform:translateX(-13px)}}}}
 @keyframes {pre}pulse{{0%,100%{{opacity:0.5}}50%{{opacity:0.95}}}}""")
     s.append(f'.{pre}card{{animation:{pre}cardin 0.5s ease-out both}}')
     s.append(f'.{pre}type{{font-family:JetBrains Mono,Fira Code,Consolas,monospace;'
@@ -404,16 +409,20 @@ def build(theme_name):
     # ============================================================
     # THEME TOGGLE  (top-left, sliding knob + two icons)
     # ============================================================
-    tb_w, tb_h, tb_x, tb_y = 74, 32, CM, CM
+    tb_w, tb_h, tb_x, tb_y = 88, 30, CM, CM
     s.append(f'<g class="{pre}card" style="animation-delay:0s">')
-    s.append(f'<rect x="{tb_x}" y="{tb_y}" width="{tb_w}" height="{tb_h}" rx="16" fill="{T["theme_btn"]}" '
+    s.append(f'<rect x="{tb_x}" y="{tb_y}" width="{tb_w}" height="{tb_h}" rx="15" fill="{T["theme_btn"]}" '
              f'stroke="{T["border"]}" stroke-width="1"/>')
-    s.append(f'<rect class="{pre}knob" x="{tb_x+3}" y="{tb_y+3}" width="34" height="{tb_h-6}" rx="13" '
-             f'fill="{T["card_hi"]}" stroke="{A}" stroke-width="1" opacity="0.95"/>')
-    for key, cx, op in [("icon_sun", tb_x + 20, 1.0), ("icon_moon", tb_x + 54, 0.55)]:
+    # The knob is a narrow pill that slides BETWEEN the two icons, so it
+    # never covers either one. It reads as a moving highlight rather than
+    # a selection background.
+    knob_w = 26
+    s.append(f'<rect class="{pre}knob" x="{tb_x+tb_w/2-knob_w/2}" y="{tb_y+4}" width="{knob_w}" '
+             f'height="{tb_h-8}" rx="9" fill="{T["card_hi"]}" stroke="{A}" stroke-width="0.9" opacity="0.85"/>')
+    for key, cx, op in [("icon_sun", tb_x + 22, 1.0), ("icon_moon", tb_x + tb_w - 22, 0.75)]:
         img = assets.get(key)
         if img:
-            s.append(f'<image href="{img}" x="{cx-11}" y="{tb_y+6}" width="22" height="20" '
+            s.append(f'<image href="{img}" x="{cx-9}" y="{tb_y+6}" width="18" height="18" '
                      f'preserveAspectRatio="xMidYMid meet" opacity="{op}"/>')
         else:
             s.append(f'<circle cx="{cx}" cy="{tb_y+tb_h/2}" r="6" fill="none" stroke="{T["muted"]}" stroke-width="1.5"/>')
@@ -423,7 +432,8 @@ def build(theme_name):
     # HEADER
     # ============================================================
     nx, ny = W / 2, 96
-    NC = [A, T["accent2"], T["accent"], A, T["accent2"], T["ghost"], T["accent"], A]
+    NC = [A, T["accent2"], T["accent"], A, T["accent"], T["accent2"],
+          T["accent"], T["accent2"], A]
     name = "LinYePing"
     fs = 42
     s.append(f'<text x="{nx}" y="{ny}" font-family="Google Sans,Segoe UI,sans-serif" font-size="{fs}" '
@@ -473,7 +483,7 @@ def build(theme_name):
     s.append(f'<g class="{pre}card" style="animation-delay:0.05s">')
     s.append(card(T, CM, ay, cw, about_h))
     s.append(f'<line x1="{CM}" y1="{ay+28}" x2="{CM+cw}" y2="{ay+28}" stroke="{T["border"]}" stroke-width="0.5"/>')
-    s.append(f'<text x="{CM+20}" y="{ay+19}" font-family="JetBrains Mono,Consolas,monospace" font-size="10" '
+    s.append(f'<text x="{CM+PAD}" y="{ay+19}" font-family="JetBrains Mono,Consolas,monospace" font-size="10" '
              f'fill="{T["faint"]}">linyeping@github</text>')
 
     lines = [
@@ -486,7 +496,7 @@ def build(theme_name):
     ]
     ty = ay + 50
     for i, (ln, col, bold) in enumerate(lines):
-        s.append(f'<text x="{CM+20}" y="{ty}" font-family="JetBrains Mono,Consolas,monospace" '
+        s.append(f'<text x="{CM+PAD}" y="{ty}" font-family="JetBrains Mono,Consolas,monospace" '
                  f'font-size="12" font-weight="{"600" if bold else "400"}" fill="{col}">{esc(ln)}</text>')
         ty += 20
     s.append("</g>")
@@ -495,15 +505,20 @@ def build(theme_name):
     # TYPEWRITER  (below About, over a calm slice of the field)
     # ============================================================
     py_ = y_type
+    # measured in-browser: this 91-char line renders 728px wide at 13px,
+    # so the average advance is 8.0px, not the 6.6 a naive estimate gives
+    type_w = len(TYPE_LINE) * 8.0
     s.append(f'<g class="{pre}card" style="animation-delay:0.1s">')
     s.append(card(T, CM, py_, cw, type_h))
     s.append(card_title(T, CM + 18, py_ + 24, "Statement", pre))
-    s.append(f'<text x="{W-CM-24}" y="{py_+24}" font-family="monospace" font-size="9" '
+    s.append(f'<text x="{W-CM-PAD}" y="{py_+24}" font-family="monospace" font-size="9" '
              f'fill="{T["faint"]}" text-anchor="end">typewriter</text>')
-    s.append(f'<rect x="{CM+16}" y="{py_+36}" width="3" height="{type_h-52}" rx="1.5" fill="{A}" opacity="0.7"/>')
-    s.append(f'<text class="{pre}type" x="{CM+32}" y="{py_+60}" font-size="13" fill="{T["text"]}" '
+    s.append(f'<rect x="{CM+PAD}" y="{py_+36}" width="3" height="{type_h-52}" rx="1.5" fill="{A}" opacity="0.7"/>')
+    s.append(f'<text class="{pre}type" x="{CM+PAD+14}" y="{py_+60}" font-size="13" fill="{T["text"]}" '
              f'xml:space="preserve">{esc(TYPE_LINE)}</text>')
-    s.append(f'<rect class="{pre}caret" x="{CM+32+len(TYPE_LINE)*7.0:.0f}" y="{py_+48}" width="8" height="16" '
+    # caret rides the end of the text. The line is 87 chars at 13px in a
+    # proportional face, so the width has to be measured, not estimated.
+    s.append(f'<rect class="{pre}caret" x="{CM+PAD+14+type_w:.0f}" y="{py_+48}" width="2" height="15" '
              f'fill="{A}" rx="1"/>')
     s.append("</g>")
 
@@ -529,14 +544,15 @@ def build(theme_name):
         s.append(f'<rect x="{cx:.0f}" y="{cy}" width="{sub_w:.0f}" height="{ch}" fill="{T["bg_alt"]}" rx="7" '
                  f'stroke="{T["border"]}" stroke-width="0.5"/>')
         s.append(f'<rect x="{cx:.0f}" y="{cy}" width="{sub_w:.0f}" height="3" fill="{color}" rx="1.5"/>')
-        s.append(f'<text x="{cx+sub_w/2:.0f}" y="{cy+24}" font-family="Google Sans,Segoe UI,sans-serif" '
-                 f'font-size="12.5" font-weight="600" fill="{T["text"]}" text-anchor="middle">{esc(title)}</text>')
+        # left-aligned inside the sub-card: title and tags share one edge
+        s.append(f'<text x="{cx+14:.0f}" y="{cy+24}" font-family="Google Sans,Segoe UI,sans-serif" '
+                 f'font-size="12.5" font-weight="600" fill="{T["text"]}">{esc(title)}</text>')
         tagy = cy + 44
         for tag in tags:
             tw = len(tag) * 6.4 + 16
-            tx = cx + sub_w / 2 - tw / 2
+            tx = cx + 14
             s.append(f'<rect x="{tx:.0f}" y="{tagy}" width="{tw:.0f}" height="18" fill="{color}" opacity="0.12" rx="9"/>')
-            s.append(f'<text x="{cx+sub_w/2:.0f}" y="{tagy+13}" font-family="monospace" font-size="10" '
+            s.append(f'<text x="{tx+tw/2:.0f}" y="{tagy+13}" font-family="monospace" font-size="10" '
                      f'fill="{color}" text-anchor="middle" opacity="0.92">{esc(tag)}</text>')
             tagy += 23
     s.append("</g>")
@@ -564,9 +580,9 @@ def build(theme_name):
     rowy = tb + 44
     avail = CM + cw - 24 - (CM + 108)   # right edge the chip row may reach
     for cat, chips in cats:
-        s.append(f'<text x="{CM+24}" y="{rowy+16}" font-family="Google Sans,Segoe UI,sans-serif" '
+        s.append(f'<text x="{CM+IN}" y="{rowy+16}" font-family="Google Sans,Segoe UI,sans-serif" '
                  f'font-size="11" fill="{T["muted"]}">{esc(cat)}</text>')
-        xc = CM + 108
+        xc = CM + COL
         for name_, color in chips:
             chipw = len(name_) * 7.6 + 28
             if xc + chipw > avail:          # drop chips that would run past the card
@@ -610,23 +626,26 @@ def build(theme_name):
                  f'<rect x="{px:.0f}" y="{pcy}" width="{pw:.0f}" height="{pch}" fill="{T["bg_alt"]}" rx="7" '
                  f'stroke="{T["border"]}" stroke-width="0.5"/></a>')
         s.append(f'<rect x="{px:.0f}" y="{pcy}" width="3" height="{pch}" fill="{color}" rx="1.5"/>')
-        lx, ly, lsz = px + 16, pcy + 10, 40
+        lx, ly, lsz = px + IN, pcy + 10, 40
         if logo:
             s.append(f'<image href="{logo}" x="{lx}" y="{ly}" width="{lsz}" height="{lsz}" '
                      f'preserveAspectRatio="xMidYMid meet"/>')
-        s.append(f'<text x="{lx+lsz+10}" y="{ly+16}" font-family="Google Sans,Segoe UI,sans-serif" '
+        # name and star sit to the right of the logo, on the logo's own
+        # vertical centre so the block reads as one unit
+        tx = lx + lsz + 12
+        s.append(f'<text x="{tx:.0f}" y="{ly+17}" font-family="Google Sans,Segoe UI,sans-serif" '
                  f'font-size="15" font-weight="600" fill="{T["text"]}">{esc(nm)}</text>')
-        s.append(f'<text x="{lx+lsz+10}" y="{ly+32}" font-family="monospace" font-size="10" '
+        s.append(f'<text x="{tx:.0f}" y="{ly+33}" font-family="monospace" font-size="10" '
                  f'fill="{color}">&#9733; {st}</text>')
-        s.append(f'<text x="{px+pw-14:.0f}" y="{ly+16}" font-family="monospace" font-size="10" '
+        s.append(f'<text x="{px+pw-IN:.0f}" y="{ly+17}" font-family="monospace" font-size="10" '
                  f'fill="{T["faint"]}" text-anchor="end">view \u2192</text>')
         dy = pcy + 66
         for ln in wrap(desc, 46)[:4]:
-            s.append(f'<text x="{px+14:.0f}" y="{dy}" font-family="Google Sans,Segoe UI,sans-serif" '
+            s.append(f'<text x="{px+IN:.0f}" y="{dy}" font-family="Google Sans,Segoe UI,sans-serif" '
                      f'font-size="11" fill="{T["muted"]}">{esc(ln)}</text>')
             dy += 15
         if stack:
-            s.append(f'<text x="{px+14:.0f}" y="{pcy+pch-12}" font-family="monospace" font-size="9" '
+            s.append(f'<text x="{px+IN:.0f}" y="{pcy+pch-12}" font-family="monospace" font-size="9" '
                      f'fill="{color}" opacity="0.72">{esc(stack)}</text>')
     s.append("</g>")
 
@@ -668,15 +687,15 @@ def build(theme_name):
             ty2 = kcy + 12 + ih + 22
         else:
             ty2 = kcy + 30
-        s.append(f'<circle cx="{kx+18:.0f}" cy="{ty2-4}" r="4" fill="{mc}"/>')
-        s.append(f'<text x="{kx+28:.0f}" y="{ty2}" font-family="monospace" font-size="10.5" font-weight="600" '
+        s.append(f'<circle cx="{kx+IN+2:.0f}" cy="{ty2-4}" r="4" fill="{mc}"/>')
+        s.append(f'<text x="{kx+IN+12:.0f}" y="{ty2}" font-family="monospace" font-size="10.5" font-weight="600" '
                  f'fill="{mc}">{esc(medal.upper())}</text>')
-        s.append(f'<text x="{kx+kw-14:.0f}" y="{ty2}" font-family="monospace" font-size="9.5" '
+        s.append(f'<text x="{kx+kw-IN:.0f}" y="{ty2}" font-family="monospace" font-size="9.5" '
                  f'fill="{T["faint"]}" text-anchor="end">{esc(rank)}</text>')
         nm_lines = wrap(comp, 40)
         ny2 = ty2 + 15
         for ln in nm_lines[:2]:
-            s.append(f'<text x="{kx+14:.0f}" y="{ny2}" font-family="Google Sans,Segoe UI,sans-serif" '
+            s.append(f'<text x="{kx+IN:.0f}" y="{ny2}" font-family="Google Sans,Segoe UI,sans-serif" '
                      f'font-size="11" fill="{T["text"]}">{esc(ln)}</text>')
             ny2 += 14
     s.append("</g>")
@@ -688,7 +707,7 @@ def build(theme_name):
     s.append(f'<g class="{pre}card" style="animation-delay:0.35s">')
     s.append(card(T, CM, py2, cw, pub_h))
     s.append(card_title(T, CM + 18, py2 + 24, "Publications", pre))
-    cols = [CM + 22, CM + 56, CM + 448, CM + 660]
+    cols = [CM + 22, CM + 58, CM + 452, CM + 664]
     thy = py2 + 52
     s.append(f'<rect x="{CM+12}" y="{thy-12}" width="{cw-24}" height="20" fill="{T["bg"]}" opacity="0.6" rx="3"/>')
     for cx, h in zip(cols, ["#", "Title", "Venue", "Status"]):
@@ -704,28 +723,40 @@ def build(theme_name):
          "enhancement and multi-scale adaptive fusion", "Data Intelligence", "2026.09",
          "https://doi.org/10.3724/2096-7004.di.2025.1349"),
     ]
+    # Every cell in a row shares one baseline. The title may wrap to three
+    # lines, so the row is laid out from the title block: the number, venue
+    # and pill all align to the title's FIRST line, and the row height is
+    # driven by the title block.
     for row, (title, venue, year, doi) in enumerate(papers):
-        ryr = thy + 28 + row * 42
+        dl = wrap(title, 63)[:3]
+        nlines = len(dl)
+        row_h = 22 + nlines * 14
+        ryr = thy + 30 + row * 46          # first-line baseline
+        block_top = ryr - 13               # top of the title block
         if row % 2 == 0:
-            s.append(f'<rect x="{CM+12}" y="{ryr-14}" width="{cw-24}" height="40" fill="{T["bg"]}" opacity="0.45" rx="3"/>')
+            s.append(f'<rect x="{CM+12}" y="{block_top-8}" width="{cw-24}" height="{row_h+8}" '
+                     f'fill="{T["bg"]}" opacity="0.45" rx="3"/>')
         s.append(f'<a href="{doi}" target="_blank">'
-                 f'<rect x="{CM+12}" y="{ryr-14}" width="{cw-24}" height="40" fill="transparent"/></a>')
-        s.append(f'<text x="{cols[0]}" y="{ryr}" font-family="monospace" font-size="11" fill="{T["faint"]}">{row+1}</text>')
-        dl = wrap(title, 64)[:3]
-        base = ryr + (len(dl) - 1) * 7
+                 f'<rect x="{CM+12}" y="{block_top-8}" width="{cw-24}" height="{row_h+8}" '
+                 f'fill="transparent"/></a>')
+        s.append(f'<text x="{cols[0]}" y="{ryr}" font-family="monospace" font-size="11" '
+                 f'fill="{T["faint"]}">{row+1}</text>')
         for li, ln in enumerate(dl):
-            s.append(f'<text x="{cols[1]}" y="{base+li*14}" font-family="Google Sans,Segoe UI,sans-serif" '
+            s.append(f'<text x="{cols[1]}" y="{ryr+li*14}" font-family="Google Sans,Segoe UI,sans-serif" '
                      f'font-size="10" font-style="italic" fill="{T["text"]}">{esc(ln)}</text>')
         s.append(f'<text x="{cols[2]}" y="{ryr}" font-family="monospace" font-size="10" '
                  f'fill="{T["muted"]}">{esc(venue)}</text>')
-        # year sits inside the pill: a trailing label pushed past the card edge
-        bw = 116
-        bx = cols[3]
-        s.append(f'<rect x="{bx}" y="{ryr-11}" width="{bw}" height="18" fill="{T["accent2"]}" opacity="0.18" rx="9"/>')
-        s.append(f'<text x="{bx+9}" y="{ryr+2}" font-family="monospace" font-size="9" font-weight="600" '
-                 f'fill="{T["accent"]}">PUBLISHED</text>')
-        s.append(f'<text x="{bx+bw-9}" y="{ryr+2}" font-family="monospace" font-size="9" '
-                 f'fill="{T["muted"]}" text-anchor="end">{year}</text>')
+        # the pill is optically centred on the title block, not on the first line
+        pw_ = 116
+        px_ = cols[3]
+        pill_y = ryr - 9 + (nlines - 1) * 7
+        s.append(f'<rect x="{px_}" y="{pill_y}" width="{pw_}" height="18" fill="{T["accent2"]}" '
+                 f'opacity="0.18" rx="9"/>')
+        s.append(f'<text x="{px_+10}" y="{pill_y+13}" font-family="monospace" font-size="9" '
+                 f'font-weight="600" fill="{T["accent"]}">PUBLISHED</text>')
+        s.append(f'<rect x="{px_+73}" y="{pill_y+5}" width="0.5" height="9" fill="{T["border"]}"/>')
+        s.append(f'<text x="{px_+82}" y="{pill_y+13}" font-family="monospace" font-size="9" '
+                 f'fill="{T["muted"]}">{year}</text>')
     s.append("</g>")
 
     # ============================================================
