@@ -139,8 +139,6 @@ assets = {}
 for key, fname in [
     ("cert_bronze", "cert_bronze.png"),
     ("cert_silver", "cert_silver.png"),
-    ("icon_sun", "icon_sun.png"),
-    ("icon_moon", "icon_moon.png"),
 ]:
     p = os.path.join(ASSETS, fname)
     try:
@@ -339,7 +337,7 @@ def build(theme_name):
     cw = W - CM * 2
 
     hdr_h, about_h, type_h, res_h = 250, 178, 74, 190
-    tech_h, proj_h, kag_h, pub_h, snake_h, ftr_h = 246, 212, 300, 228, 132, 66
+    tech_h, proj_h, kag_h, pub_h, snake_h, ftr_h = 246, 212, 300, 286, 132, 66
 
     total = (hdr_h + GAP + about_h + GAP + type_h + GAP + res_h + GAP + tech_h + GAP
              + proj_h + GAP + kag_h + GAP + pub_h + GAP + snake_h + GAP + ftr_h)
@@ -364,13 +362,11 @@ def build(theme_name):
 @keyframes {pre}caret{{0%,100%{{opacity:1}}50%{{opacity:0}}}}
 @keyframes {pre}tw{{0%{{clip-path:inset(0 100% 0 0)}}100%{{clip-path:inset(0 0 0 0)}}}}
 @keyframes {pre}cardin{{0%{{opacity:0;transform:translateY(10px)}}100%{{opacity:1;transform:translateY(0)}}}}
-@keyframes {pre}slide{{0%{{transform:translateX(-13px)}}50%{{transform:translateX(13px)}}100%{{transform:translateX(-13px)}}}}
 @keyframes {pre}pulse{{0%,100%{{opacity:0.5}}50%{{opacity:0.95}}}}""")
     s.append(f'.{pre}card{{animation:{pre}cardin 0.5s ease-out both}}')
     s.append(f'.{pre}type{{font-family:JetBrains Mono,Fira Code,Consolas,monospace;'
              f'animation:{pre}tw 9s steps(88)1.1s forwards;}}')
     s.append(f'.{pre}caret{{animation:{pre}caret 1.05s step-end infinite}}')
-    s.append(f'.{pre}knob{{animation:{pre}slide 4.5s ease-in-out infinite}}')
     s.append(f'.{pre}halo{{animation:{pre}pulse 6s ease-in-out infinite}}')
     s.append("</style>")
 
@@ -404,28 +400,6 @@ def build(theme_name):
     s.append(f'<g style="animation:{pre}drift 26s ease-in-out infinite">')
     s.extend(dot_field(W, total, T, 18, 1.0, 0.0))
     s.append("</g>")
-    s.append("</g>")
-
-    # ============================================================
-    # THEME TOGGLE  (top-left, sliding knob + two icons)
-    # ============================================================
-    tb_w, tb_h, tb_x, tb_y = 88, 30, CM, CM
-    s.append(f'<g class="{pre}card" style="animation-delay:0s">')
-    s.append(f'<rect x="{tb_x}" y="{tb_y}" width="{tb_w}" height="{tb_h}" rx="15" fill="{T["theme_btn"]}" '
-             f'stroke="{T["border"]}" stroke-width="1"/>')
-    # The knob is a narrow pill that slides BETWEEN the two icons, so it
-    # never covers either one. It reads as a moving highlight rather than
-    # a selection background.
-    knob_w = 26
-    s.append(f'<rect class="{pre}knob" x="{tb_x+tb_w/2-knob_w/2}" y="{tb_y+4}" width="{knob_w}" '
-             f'height="{tb_h-8}" rx="9" fill="{T["card_hi"]}" stroke="{A}" stroke-width="0.9" opacity="0.85"/>')
-    for key, cx, op in [("icon_sun", tb_x + 22, 1.0), ("icon_moon", tb_x + tb_w - 22, 0.75)]:
-        img = assets.get(key)
-        if img:
-            s.append(f'<image href="{img}" x="{cx-9}" y="{tb_y+6}" width="18" height="18" '
-                     f'preserveAspectRatio="xMidYMid meet" opacity="{op}"/>')
-        else:
-            s.append(f'<circle cx="{cx}" cy="{tb_y+tb_h/2}" r="6" fill="none" stroke="{T["muted"]}" stroke-width="1.5"/>')
     s.append("</g>")
 
     # ============================================================
@@ -727,36 +701,56 @@ def build(theme_name):
     # lines, so the row is laid out from the title block: the number, venue
     # and pill all align to the title's FIRST line, and the row height is
     # driven by the title block.
+    # Every row is the same height regardless of how the title wraps, so the
+    # zebra banding lines up. The title is truncated to two lines: a third
+    # line made the last row taller than the others and pushed the card
+    # out of shape.
+    # Row pitch is fixed at 54px and every title is fitted to exactly two
+    # lines, so the number, title, venue and pill all sit on one baseline
+    # and the zebra bands line up. Titles that need a third line are
+    # truncated with an ellipsis rather than spilling past the band.
+    # Every row gets the same height, sized for the longest title. Titles
+    # wrap naturally; the number, venue and pill all sit on the row's first
+    # baseline. Truncating a title to fit was not an option - the paper
+    # name is the point of the row.
+    MAXL = max(len(wrap(t, 60)) for t, _, _, _ in papers)
+    ROW_H = 22 + MAXL * 15
     for row, (title, venue, year, doi) in enumerate(papers):
-        dl = wrap(title, 63)[:3]
-        nlines = len(dl)
-        row_h = 22 + nlines * 14
-        ryr = thy + 30 + row * 46          # first-line baseline
-        block_top = ryr - 13               # top of the title block
+        lines = wrap(title, 60)
+        ryr = thy + 32 + row * ROW_H       # shared baseline for the row
+        band_top = ryr - 16
+        band_h = ROW_H - 6
         if row % 2 == 0:
-            s.append(f'<rect x="{CM+12}" y="{block_top-8}" width="{cw-24}" height="{row_h+8}" '
+            s.append(f'<rect x="{CM+12}" y="{band_top}" width="{cw-24}" height="{band_h}" '
                      f'fill="{T["bg"]}" opacity="0.45" rx="3"/>')
         s.append(f'<a href="{doi}" target="_blank">'
-                 f'<rect x="{CM+12}" y="{block_top-8}" width="{cw-24}" height="{row_h+8}" '
+                 f'<rect x="{CM+12}" y="{band_top}" width="{cw-24}" height="{band_h}" '
                  f'fill="transparent"/></a>')
+        # number, title, venue and pill all share ryr as their baseline
         s.append(f'<text x="{cols[0]}" y="{ryr}" font-family="monospace" font-size="11" '
-                 f'fill="{T["faint"]}">{row+1}</text>')
-        for li, ln in enumerate(dl):
-            s.append(f'<text x="{cols[1]}" y="{ryr+li*14}" font-family="Google Sans,Segoe UI,sans-serif" '
-                     f'font-size="10" font-style="italic" fill="{T["text"]}">{esc(ln)}</text>')
+                 f'fill="{T["faint"]}" dominant-baseline="alphabetic">{row+1}</text>')
+        for li, ln in enumerate(lines):
+            s.append(f'<text x="{cols[1]}" y="{ryr+li*15}" font-family="Google Sans,Segoe UI,sans-serif" '
+                     f'font-size="10" font-style="italic" fill="{T["text"]}" '
+                     f'dominant-baseline="alphabetic">{esc(ln)}</text>')
         s.append(f'<text x="{cols[2]}" y="{ryr}" font-family="monospace" font-size="10" '
-                 f'fill="{T["muted"]}">{esc(venue)}</text>')
-        # the pill is optically centred on the title block, not on the first line
+                 f'fill="{T["muted"]}" dominant-baseline="alphabetic">{esc(venue)}</text>')
+        # The pill sits on the SAME baseline as the row number, the title's
+        # first line and the venue. Centring it on the wrapped title block
+        # put it at a different height in every row, which read as a
+        # misaligned table.
         pw_ = 116
         px_ = cols[3]
-        pill_y = ryr - 9 + (nlines - 1) * 7
+        pill_y = ryr - 9
         s.append(f'<rect x="{px_}" y="{pill_y}" width="{pw_}" height="18" fill="{T["accent2"]}" '
                  f'opacity="0.18" rx="9"/>')
-        s.append(f'<text x="{px_+10}" y="{pill_y+13}" font-family="monospace" font-size="9" '
-                 f'font-weight="600" fill="{T["accent"]}">PUBLISHED</text>')
-        s.append(f'<rect x="{px_+73}" y="{pill_y+5}" width="0.5" height="9" fill="{T["border"]}"/>')
-        s.append(f'<text x="{px_+82}" y="{pill_y+13}" font-family="monospace" font-size="9" '
-                 f'fill="{T["muted"]}">{year}</text>')
+        # 9px text on an 11px row baseline: nudge up so the pill's text
+        # shares the row's baseline with the number and the venue
+        s.append(f'<text x="{px_+10}" y="{ryr}" font-family="monospace" font-size="9" '
+                 f'font-weight="600" fill="{T["accent"]}" dominant-baseline="alphabetic">PUBLISHED</text>')
+        s.append(f'<rect x="{px_+73}" y="{ryr-7}" width="0.5" height="9" fill="{T["border"]}"/>')
+        s.append(f'<text x="{px_+82}" y="{ryr}" font-family="monospace" font-size="9" '
+                 f'fill="{T["muted"]}" dominant-baseline="alphabetic">{year}</text>')
     s.append("</g>")
 
     # ============================================================
