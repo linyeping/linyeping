@@ -306,11 +306,12 @@ def dot_defs(T, prefix):
 # CARD SHELL
 # ============================================================
 def card(T, x, y, w, h):
-    # 0.93 alpha: solid enough to keep text contrast, sheer enough that the
-    # interference field stays visible as a texture behind the content
+    # Opaque. At 0.93 alpha the dot field showed through nicely, but the
+    # Kaggle card's text bled into the Publications header above it.
+    # The field still reads in the 24px gutters and the header band.
     return (
         f'<rect x="{x+2}" y="{y+2}" width="{w}" height="{h}" fill="black" opacity="0.3" rx="{CRX}"/>'
-        f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{T["card"]}" fill-opacity="0.93" rx="{CRX}" '
+        f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{T["card"]}" rx="{CRX}" '
         f'stroke="{T["border"]}" stroke-width="1"/>'
     )
 
@@ -333,7 +334,7 @@ def build(theme_name):
     cw = W - CM * 2
 
     hdr_h, about_h, type_h, res_h = 250, 178, 74, 190
-    tech_h, proj_h, kag_h, pub_h, snake_h, ftr_h = 246, 212, 246, 232, 132, 66
+    tech_h, proj_h, kag_h, pub_h, snake_h, ftr_h = 246, 212, 300, 232, 132, 66
 
     total = (hdr_h + GAP + about_h + GAP + type_h + GAP + res_h + GAP + tech_h + GAP
              + proj_h + GAP + kag_h + GAP + pub_h + GAP + snake_h + GAP + ftr_h)
@@ -525,7 +526,7 @@ def build(theme_name):
         cx = CM + 16 + ci * (sub_w + sub_gap)
         cy = ry + 40
         ch = res_h - 54
-        s.append(f'<rect x="{cx:.0f}" y="{cy}" width="{sub_w:.0f}" height="{ch}" fill="{T["bg_alt"]}" fill-opacity="0.9" rx="7" '
+        s.append(f'<rect x="{cx:.0f}" y="{cy}" width="{sub_w:.0f}" height="{ch}" fill="{T["bg_alt"]}" rx="7" '
                  f'stroke="{T["border"]}" stroke-width="0.5"/>')
         s.append(f'<rect x="{cx:.0f}" y="{cy}" width="{sub_w:.0f}" height="3" fill="{color}" rx="1.5"/>')
         s.append(f'<text x="{cx+sub_w/2:.0f}" y="{cy+24}" font-family="Google Sans,Segoe UI,sans-serif" '
@@ -606,7 +607,7 @@ def build(theme_name):
         pcy = pj + 38
         pch = proj_h - 52
         s.append(f'<a href="{url}" target="_blank">'
-                 f'<rect x="{px:.0f}" y="{pcy}" width="{pw:.0f}" height="{pch}" fill="{T["bg_alt"]}" fill-opacity="0.9" rx="7" '
+                 f'<rect x="{px:.0f}" y="{pcy}" width="{pw:.0f}" height="{pch}" fill="{T["bg_alt"]}" rx="7" '
                  f'stroke="{T["border"]}" stroke-width="0.5"/></a>')
         s.append(f'<rect x="{px:.0f}" y="{pcy}" width="3" height="{pch}" fill="{color}" rx="1.5"/>')
         lx, ly, lsz = px + 16, pcy + 10, 40
@@ -647,15 +648,24 @@ def build(theme_name):
         kx = CM + 16 + bi * (kw + kgap)
         kcy = ky + 38
         kch = kag_h - 52
-        s.append(f'<rect x="{kx:.0f}" y="{kcy}" width="{kw:.0f}" height="{kch}" fill="{T["bg_alt"]}" fill-opacity="0.9" rx="7" '
+        s.append(f'<rect x="{kx:.0f}" y="{kcy}" width="{kw:.0f}" height="{kch}" fill="{T["bg_alt"]}" rx="7" '
                  f'stroke="{T["border"]}" stroke-width="0.5"/>')
         s.append(f'<rect x="{kx:.0f}" y="{kcy}" width="3" height="{kch}" fill="{mc}" rx="1.5"/>')
         if cert:
-            iw = kw - 28
-            ih = iw * 345 / 560
-            s.append(f'<image href="{cert}" x="{kx+14:.0f}" y="{kcy+12}" width="{iw:.0f}" height="{ih:.0f}" '
+            # fit the certificate to the height actually available rather than
+            # to the card width - at full width a 560x345 cert is taller than
+            # the caption block allows and spills past the card edge
+            cap_h = 48
+            iw_max, ih_max = kw - 28, kch - 24 - cap_h
+            ih = ih_max
+            iw = ih * 560 / 345
+            if iw > iw_max:
+                iw = iw_max
+                ih = iw * 345 / 560
+            ix = kx + (kw - iw) / 2
+            s.append(f'<image href="{cert}" x="{ix:.0f}" y="{kcy+12}" width="{iw:.0f}" height="{ih:.0f}" '
                      f'preserveAspectRatio="xMidYMid meet" opacity="0.96"/>')
-            ty2 = kcy + ih + 30
+            ty2 = kcy + 12 + ih + 22
         else:
             ty2 = kcy + 30
         s.append(f'<circle cx="{kx+18:.0f}" cy="{ty2-4}" r="4" fill="{mc}"/>')
@@ -678,7 +688,7 @@ def build(theme_name):
     s.append(f'<g class="{pre}card" style="animation-delay:0.35s">')
     s.append(card(T, CM, py2, cw, pub_h))
     s.append(card_title(T, CM + 18, py2 + 24, "Publications", pre))
-    cols = [CM + 22, CM + 56, CM + 528, CM + 690]
+    cols = [CM + 22, CM + 56, CM + 448, CM + 660]
     thy = py2 + 52
     s.append(f'<rect x="{CM+12}" y="{thy-12}" width="{cw-24}" height="20" fill="{T["bg"]}" opacity="0.6" rx="3"/>')
     for cx, h in zip(cols, ["#", "Title", "Venue", "Status"]):
@@ -708,13 +718,14 @@ def build(theme_name):
                      f'font-size="10" font-style="italic" fill="{T["text"]}">{esc(ln)}</text>')
         s.append(f'<text x="{cols[2]}" y="{ryr}" font-family="monospace" font-size="10" '
                  f'fill="{T["muted"]}">{esc(venue)}</text>')
-        bw = 76
+        # year sits inside the pill: a trailing label pushed past the card edge
+        bw = 116
         bx = cols[3]
         s.append(f'<rect x="{bx}" y="{ryr-11}" width="{bw}" height="18" fill="{T["accent2"]}" opacity="0.18" rx="9"/>')
-        s.append(f'<text x="{bx+bw/2}" y="{ryr+1}" font-family="monospace" font-size="9" font-weight="600" '
-                 f'fill="{T["accent"]}" text-anchor="middle">PUBLISHED</text>')
-        s.append(f'<text x="{bx+bw+10}" y="{ryr+1}" font-family="monospace" font-size="9" '
-                 f'fill="{T["faint"]}">{year}</text>')
+        s.append(f'<text x="{bx+9}" y="{ryr+2}" font-family="monospace" font-size="9" font-weight="600" '
+                 f'fill="{T["accent"]}">PUBLISHED</text>')
+        s.append(f'<text x="{bx+bw-9}" y="{ryr+2}" font-family="monospace" font-size="9" '
+                 f'fill="{T["muted"]}" text-anchor="end">{year}</text>')
     s.append("</g>")
 
     # ============================================================
