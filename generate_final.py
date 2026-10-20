@@ -37,10 +37,14 @@ def dl_encode(url, sz=72):
 # LIVE STAR COUNTS from GitHub API
 # ============================================================
 def get_stars(repo):
-    """Fetch live stargazers_count for linyeping/<repo>."""
+    """Fetch live stargazers_count for linyeping/<repo>. Uses GITHUB_TOKEN when present."""
     try:
         url = f"https://api.github.com/repos/linyeping/{repo}"
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        headers = {'User-Agent': 'Mozilla/5.0', 'Accept': 'application/vnd.github+json'}
+        token = os.environ.get('GITHUB_TOKEN', '').strip()
+        if token:
+            headers['Authorization'] = f'Bearer {token}'
+        req = urllib.request.Request(url, headers=headers)
         data = json.loads(urllib.request.urlopen(req, timeout=10).read())
         return str(data.get("stargazers_count", "?"))
     except Exception as e:
@@ -49,15 +53,15 @@ def get_stars(repo):
 
 print("Fetching star counts...")
 stars_gem = get_stars("GemMate")
-stars_inv = get_stars("InSeeVision")
+stars_metis = get_stars("Metis")
 print(f"  GemMate: {stars_gem} stars")
-print(f"  InSeeVision: {stars_inv} stars")
+print(f"  Metis: {stars_metis} stars")
 
 print("Downloading logos...")
 logo_gem = dl_encode("https://github.com/linyeping/GemMate/raw/main/assets/cover.png", 72)
-logo_inv = dl_encode("https://raw.githubusercontent.com/linyeping/InSeeVision/master/assets/7.png", 72)
+logo_metis = dl_encode("https://raw.githubusercontent.com/linyeping/Metis/main/backend/assets/metis-M-128.png", 72)
 print(f"  GemMate: {'OK' if logo_gem else 'FAIL'}")
-print(f"  InSeeVision: {'OK' if logo_inv else 'FAIL'}")
+print(f"  Metis: {'OK' if logo_metis else 'FAIL'}")
 
 # ============================================================
 # HELPERS
@@ -87,20 +91,23 @@ def stitle(x, y, text, ci):
 # ============================================================
 def build():
     hdr_h = 240
-    about_h = 145
+    about_h = 185
     res_h = 195
-    tech_h = 175
-    proj_h = 170
-    pub_h = 160
+    tech_h = 250
+    proj_h = 215
+    exp_h = 300
+    pub_h = 230
     net_h = 100  # flowing network section
     ftr_h = 70
 
-    total = hdr_h + GAP + about_h + GAP + res_h + GAP + tech_h + GAP + proj_h + GAP + pub_h + GAP + net_h + ftr_h
+    total = (hdr_h + GAP + about_h + GAP + res_h + GAP + tech_h + GAP
+             + proj_h + GAP + exp_h + GAP + pub_h + GAP + net_h + ftr_h)
     y_about = hdr_h + GAP
     y_res = y_about + about_h + GAP
     y_tech = y_res + res_h + GAP
     y_proj = y_tech + tech_h + GAP
-    y_pub = y_proj + proj_h + GAP
+    y_exp = y_proj + proj_h + GAP
+    y_pub = y_exp + exp_h + GAP
     y_net = y_pub + pub_h + GAP
     y_ftr = y_net + net_h
 
@@ -250,11 +257,11 @@ def build():
     s.append(f'</text>')
 
     # Subtitle
-    s.append(f'<text x="{nx}" y="{ny+46}" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="{T2}" text-anchor="middle" opacity="0.5">build something interesting, Why not?</text>')
+    s.append(f'<text x="{nx}" y="{ny+46}" font-family="Google Sans,Segoe UI,sans-serif" font-size="13" fill="{T1}" text-anchor="middle" opacity="0.85">AI Agent Engineer  /  LLM Application Development  /  On-Device AI</text>')
 
     # Role chips
-    roles = [("AI Undergraduate", G[0]), ("ML / DL", G[1]), ("Flutter Dev", G[2]), ("On-Device AI", G[3])]
-    role_y = ny + 68
+    roles = [("AI Agents", G[0]), ("LLM App Dev", G[1]), ("On-Device AI", G[2]),("MCP / Tool Use", G[3])]
+    role_y = ny + 66
     total_rw = sum(len(r)*8+28 for r,_ in roles) + 10*(len(roles)-1)
     rx = nx - total_rw/2
     for text, color in roles:
@@ -263,6 +270,9 @@ def build():
         s.append(f'<rect x="{rx:.0f}" y="{role_y}" width="{rw}" height="24" fill="none" stroke="{color}" stroke-width="0.8" opacity="0.35" rx="12"/>')
         s.append(f'<text x="{rx+rw/2:.0f}" y="{role_y+16}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{color}" text-anchor="middle">{text}</text>')
         rx += rw + 10
+
+    # Contact line
+    s.append(f'<text x="{nx}" y="{role_y+42}" font-family="JetBrains Mono,Fira Code,monospace" font-size="11" fill="{T2}" text-anchor="middle" opacity="0.7">201180946@qq.com&#160;&#160;&#183;&#160;&#160;yepinglin20@gmail.com</text>')
 
     # Google dots
     s.append(gdots(nx, hdr_h - 15, 3.5, 14))
@@ -285,10 +295,12 @@ def build():
 
     lines_data = [
         ("$ whoami", "#34A853", True),
-        ("> AI Undergraduate | ML and DL Focus", T1, False),
-        ("> NLP, Computer Vision, Flutter Android Developer", T1, False),
-        ("> Exploring on-device LLM and AI Agents on mobile", T1, False),
-        ("> Interested in CUDA kernel dev and GPU optimization", T1, False),
+        ("> AI undergraduate, class of 2027  -  GPA 3.48/4.0", T1, False),
+        ("> Building desktop & mobile AI agents: Agent Loop, Tool Use, MCP, RAG", T1, False),
+        ("> Shipped 3 open-source agent products: Metis, Metis Mobile, GemMate", T1, False),
+        ("> 2 papers published (Springer / CSCD), 1 accepted - see Publications", T1, False),
+        ("> Perception algorithm intern at InceptAI  -  autonomous driving, 2026.07-10", T1, False),
+        ("> Also into CUDA kernel dev and GPU optimization", T1, False),
     ]
     ty = ay + 50
     for idx, (line, color, bold) in enumerate(lines_data):
@@ -355,10 +367,10 @@ def build():
     sub_gap = 10
     sub_w = (cw - 32 - sub_gap*3) / 4
     cards_d = [
-        ("ML / DL", G[0], ["NLP", "CV", "Transformers", "Optimization"]),
-        ("On-Device AI", G[1], ["Edge LLM", "Quantization", "Mobile Infer."]),
-        ("AI Agents", G[2], ["Autonomous", "Tool Use", "Agentic Flow"]),
-        ("CUDA / HPC", G[3], ["Kernel Dev", "GPU Opt", "Parallel"]),
+        ("AI Agents", G[0], ["Agent Loop", "Tool Use", "MCP / RAG"]),
+        ("LLM Apps", G[1], ["LangChain", "LlamaIndex", "Prompt Eng."]),
+        ("On-Device AI", G[2], ["Edge LLM", "LiteRT-LM", "llama.cpp"]),
+        ("ML / DL", G[3], ["NLP", "Multimodal", "Optimization"]),
     ]
     for ci, (title, color, tags) in enumerate(cards_d):
         cx = CM + 16 + ci*(sub_w+sub_gap)
@@ -386,9 +398,11 @@ def build():
     s.append(gdots(W-CM-30, tb+20, 2.5, 10))
 
     categories = [
-        ("AI / ML", [("Python",G[0]),("PyTorch",G[1]),("TensorFlow",G[2]),("HuggingFace",G[3]),("OpenCV",G[0]),("Kaggle",G[0])]),
-        ("Systems", [("C++",G[1]),("CUDA",G[3]),("Linux",G[2])]),
-        ("Mobile", [("Flutter",G[0]),("Dart",G[3]),("Android",G[1])]),
+        ("Agent / LLM", [("Agent Loop",G[0]),("Tool Use",G[1]),("MCP",G[2]),("RAG",G[3]),("LangChain",G[0]),("LlamaIndex",G[1]),("Prompt Design",G[2]),("Multi-Agent",G[3])]),
+        ("AI / ML", [("Python",G[1]),("PyTorch",G[2]),("TensorFlow",G[3]),("Transformers",G[0]),("Fine-tune",G[1]),("OpenCV",G[2])]),
+        ("Backend", [("Flask",G[2]),("SSE Streaming",G[3]),("REST API",G[0]),("MySQL",G[1]),("Electron",G[2]),("React",G[3])]),
+        ("Systems", [("C / C++",G[0]),("TypeScript",G[1]),("Git",G[2]),("WSL",G[3]),("Worktree",G[0])]),
+        ("On-Device", [("LiteRT-LM",G[3]),("llama.cpp",G[0]),("Flutter",G[1]),("Android / Kotlin",G[2])]),
     ]
     row_y = tb + 42
     ci2 = 0
@@ -422,10 +436,10 @@ def build():
     pg = 12
     pw = (cw - 32 - pg) / 2
     projects = [
-        ("GemMate", "Your sovereign, zero-cost AI study companion - running Gemma 4 on your own hardware.", G[0], stars_gem, logo_gem),
-        ("InSeeVision", "Edge-AI powered vision assistance for the visually impaired.", G[1], stars_inv, logo_inv),
+        ("Metis", "Desktop AI agent (Electron + Python). Agent Loop, Skills, Checkpoint, MCP connectors, 4 work surfaces. Android companion via accessibility API.", G[0], stars_metis, logo_metis, "Electron \u00b7 TypeScript \u00b7 Python \u00b7 MCP"),
+        ("GemMate", "On-device study companion. Runs Gemma 4 E2B fully local via LiteRT-LM, falls back to LAN Ollama. Smart Router + SM-2, OCR/STT, 6 languages.", G[2], stars_gem, logo_gem, "Flutter \u00b7 Dart \u00b7 LiteRT-LM \u00b7 Gemma 4"),
     ]
-    for pi, (name, desc, color, stars, logo) in enumerate(projects):
+    for pi, (name, desc, color, stars, logo, stack) in enumerate(projects):
         px = CM + 16 + pi*(pw+pg)
         pcy = py + 38
         pch = proj_h - 50
@@ -439,13 +453,24 @@ def build():
             s.append(f'<text x="{lx+lsz/2}" y="{ly+lsz/2+5}" font-size="16" fill="{color}" text-anchor="middle">{name[0]}</text>')
         s.append(f'<text x="{lx+lsz+10}" y="{ly+16}" font-family="Google Sans,Segoe UI,sans-serif" font-size="15" font-weight="600" fill="{T1}">{name}</text>')
         s.append(f'<text x="{lx+lsz+10}" y="{ly+32}" font-family="monospace" font-size="10" fill="{color}">&#9733; {stars}</text>')
+        # tech stack chips (single line, ellipsised)
+        avail_w = pw - 28
+        shown = ''
+        for part in stack.split(' \u00b7 '):
+            cand = (shown + ' \u00b7 ' + part).strip(' \u00b7')
+            if len(cand) * 6.0 + 16 > avail_w:
+                break
+            shown = cand
+        if shown:
+            s.append(f'<text x="{px+14:.0f}" y="{pcy+pch-14}" font-family="monospace" font-size="9" fill="{color}" opacity="0.7">{shown}</text>')
+        # description word wrap
         words = desc.split()
         line = ""
-        dy = pcy + 65
+        dy = pcy + 68
         for w_t in words:
-            if len(line + " " + w_t) > 48:
+            if len(line + " " + w_t) > 46:
                 s.append(f'<text x="{px+14:.0f}" y="{dy}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T2}">{line.strip()}</text>')
-                dy += 16
+                dy += 15
                 line = w_t
             else:
                 line += " " + w_t
@@ -454,32 +479,96 @@ def build():
     s.append('</g>')
 
     # ================================================================
+    # EXPERIENCE CARD
+    # ================================================================
+    ey = y_exp
+    s.append(f'<g style="animation:cardIn 0.5s ease-out 0.35s both">')
+    s.append(card(CM, ey, cw, exp_h))
+    s.append(stitle(CM+16, ey+24, "Experience", 1))
+    s.append(gdots(W-CM-30, ey+20, 2.5, 10))
+
+    jobs = [
+        ("InceptAI Technology (Shanghai)", "Perception Algorithm Intern", "2026.07 - 2026.10", G[0],
+         "Trained, evaluated and regression-tested behavior prediction models for L4 trunk-logistics AD stack; data cleaning, time alignment, scenario curation."),
+        ("Xisitech (Xi'an)", "Software Development Intern", "2025.07 - 2025.08", G[1],
+         "Feature modules and unit tests; code review and daily standups; interface specs and technical docs."),
+        ("Gansu Univ. ACM Training Team", "Founder & Captain", "2024.03 - 2026.05", G[2],
+         "Built the university ACM team from scratch; ICPC / CCPC / GPLT results; joint training with partner schools."),
+        ("Gansu Univ. AI Association", "President", "2025.07 - 2026.06", G[3],
+         "Ran Datawhale campus events, AWS Kiro Coding Party and AI+X tours. Blue Bridge award rate 12.8% (5/39) \u2192 89% (53/59)."),
+    ]
+    jy = ey + 44
+    for org, role, when, color, desc in jobs:
+        # measure first so the accent bar matches the real block height
+        words = desc.split()
+        dl, line = [], ""
+        for w_t in words:
+            if len(line + " " + w_t) > 148:
+                dl.append(line.strip()); line = w_t
+            else:
+                line += " " + w_t
+        if line.strip():
+            dl.append(line.strip())
+        blk_h = 40 + len(dl) * 14
+        s.append(f'<rect x="{CM+16}" y="{jy+2}" width="3" height="{blk_h}" fill="{color}" rx="1.5"/>')
+        s.append(f'<text x="{CM+28}" y="{jy+13}" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="{T1}">{org}</text>')
+        s.append(f'<text x="{W-CM-24}" y="{jy+13}" font-family="monospace" font-size="10" fill="{T2}" text-anchor="end">{when}</text>')
+        s.append(f'<text x="{CM+28}" y="{jy+28}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{color}">{role}</text>')
+        for li, linetxt in enumerate(dl):
+            s.append(f'<text x="{CM+28}" y="{jy+43+li*14}" font-family="Google Sans,Segoe UI,sans-serif" font-size="10" fill="{T2}">{linetxt}</text>')
+        jy += blk_h + 14
+    s.append('</g>')
+
+    # ================================================================
     # PUBLICATIONS CARD
     # ================================================================
     puy = y_pub
-    s.append(f'<g style="animation:cardIn 0.5s ease-out 0.4s both">')
+    s.append(f'<g style="animation:cardIn 0.5s ease-out 0.45s both">')
     s.append(card(CM, puy, cw, pub_h))
     s.append(stitle(CM+16, puy+24, "Publications", 0))
     s.append(gdots(W-CM-30, puy+20, 2.5, 10))
-    s.append(f'<text x="{CM+16}" y="{puy+42}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T2}" font-style="italic">Papers under review - links will be added upon acceptance.</text>')
+    s.append(f'<text x="{CM+16}" y="{puy+42}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T2}" font-style="italic">2 published (Early Access) &#183; 1 accepted. DOI links added on request.</text>')
 
-    cols = [CM+24, CM+60, CM+480, CM+600, CM+720]
-    headers = ["#","Title","Venue","Status","Link"]
-    thy = puy + 62
+    # Title / Venue / Status+Role — title wraps to 2 lines within ~400px
+    cols = [CM+22, CM+56, CM+470, CM+640]
+    thy = puy + 64
     s.append(f'<rect x="{CM+12}" y="{thy-12}" width="{cw-24}" height="20" fill="{BG}" rx="3"/>')
-    for ci3, (cx, h) in enumerate(zip(cols, headers)):
+    for cx, h in zip(cols, ["#","Title","Venue","Status / Role"]):
         s.append(f'<text x="{cx}" y="{thy}" font-family="monospace" font-size="10" fill="{T2}" font-weight="600">{h}</text>')
-    for row in range(3):
-        ryr = thy + 24 + row*26
+
+    papers = [
+        ("Social media rumor detection using multi-relational temporal-semantic augmented dynamic graph neural networks",
+         "Complex & Intelligent Systems", "PUBLISHED", G[3], "5th author"),
+        ("A coupled dataset of couplets for Tang-style poetic imitation",
+         "China Scientific Data", "PUBLISHED", G[3], "7th author"),
+        ("A decoupled approach for multimodal fake news detection incorporating entity knowledge enhancement and multi-scale adaptive fusion",
+         "Data Intelligence", "ACCEPTED", G[2], "5th author"),
+    ]
+    for row, (title, venue, status, sc, role) in enumerate(papers):
+        ryr = thy + 28 + row*40
         if row % 2 == 0:
-            s.append(f'<rect x="{CM+12}" y="{ryr-12}" width="{cw-24}" height="24" fill="{BG}" opacity="0.4" rx="2"/>')
+            s.append(f'<rect x="{CM+12}" y="{ryr-14}" width="{cw-24}" height="38" fill="{BG}" opacity="0.4" rx="2"/>')
         s.append(f'<text x="{cols[0]}" y="{ryr}" font-family="monospace" font-size="11" fill="{T2}">{row+1}</text>')
-        s.append(f'<text x="{cols[1]}" y="{ryr}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T1}" font-style="italic">Paper Title Placeholder</text>')
-        s.append(f'<text x="{cols[2]}" y="{ryr}" font-family="monospace" font-size="10" fill="{T2}">--</text>')
-        bw, bx = 72, cols[3]-2
-        s.append(f'<rect x="{bx}" y="{ryr-10}" width="{bw}" height="16" fill="{G[2]}" opacity="0.15" rx="8"/>')
-        s.append(f'<text x="{bx+bw/2}" y="{ryr}" font-family="monospace" font-size="9" fill="{G[2]}" text-anchor="middle">Under Review</text>')
-        s.append(f'<text x="{cols[4]}" y="{ryr}" font-family="monospace" font-size="10" fill="{T2}">TBD</text>')
+        # wrap title to 3 lines within ~400px
+        words = title.split()
+        dl, line = [], ""
+        for w_t in words:
+            if len(line + " " + w_t) > 58:
+                dl.append(line.strip()); line = w_t
+            else:
+                line += " " + w_t
+        if line.strip():
+            dl.append(line.strip())
+        dl = dl[:3]
+        base = ryr + (len(dl) - 1) * 7
+        for li, linetxt in enumerate(dl):
+            s.append(f'<text x="{cols[1]}" y="{base + li*14}" font-family="Google Sans,Segoe UI,sans-serif" font-size="10" fill="{T1}" font-style="italic">{linetxt}</text>')
+        s.append(f'<text x="{cols[2]}" y="{ryr}" font-family="monospace" font-size="10" fill="{T2}">{venue}</text>')
+        bw = 76
+        bx = cols[3]
+        s.append(f'<rect x="{bx}" y="{ryr-11}" width="{bw}" height="18" fill="{sc}" opacity="0.15" rx="9"/>')
+        s.append(f'<text x="{bx+bw/2}" y="{ryr+1}" font-family="monospace" font-size="9" fill="{sc}" text-anchor="middle" font-weight="600">{status}</text>')
+        s.append(f'<text x="{bx+bw+12}" y="{ryr+1}" font-family="monospace" font-size="9" fill="#6e7681">{role}</text>')
     s.append('</g>')
 
     # ================================================================
@@ -512,7 +601,7 @@ def build():
     for i, c in enumerate(G):
         s.append(f'<rect x="{i*W/4:.0f}" y="{y_ftr-3}" width="{W/4:.0f}" height="3" fill="{c}" opacity="0.6"/>')
 
-    s.append(f'<text x="{W/2}" y="{y_ftr+25}" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="{T2}" text-anchor="middle" opacity="0.6">build something interesting, Why not?</text>')
+    s.append(f'<text x="{W/2}" y="{y_ftr+25}" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="{T2}" text-anchor="middle" opacity="0.6">Let&apos;s build something that actually ships.</text>')
     s.append(gdots(W/2, y_ftr+45, 3, 14))
     s.append(f'<text x="{W/2}" y="{y_ftr+62}" font-family="monospace" font-size="9" fill="#484f58" text-anchor="middle">Made with curiosity</text>')
 

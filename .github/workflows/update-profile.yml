@@ -26,6 +26,8 @@ jobs:
 
       - name: Generate profile.svg
         run: python generate_final.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit & push if changed
         run: |
