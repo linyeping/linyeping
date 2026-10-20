@@ -12,7 +12,7 @@ Currently focused on on-device inference, agent architectures, and multimodal le
 ### What I've been up to
 
 - 📦 Shipped two open-source agent projects — **Metis** (desktop) and **GemMate** (mobile)
-- 📄 Published 3 peer-reviewed papers on graph neural networks & multimodal fake news detection
+- 📄 Co-authored 3 peer-reviewed papers on graph neural networks & multimodal fake news detection
 - 🥈 Kaggle Silver — BirdCLEF+ 2026 (194 / 4,094)
 - 🥉 Kaggle Bronze — CSIRO Image2Biomass (296 / 3,805)
 
@@ -26,6 +26,14 @@ Each task runs in an isolated Git worktree sandbox. Android companion uses the a
 
 **[GemMate](https://github.com/linyeping/GemMate)** — On-device study companion (Flutter).  
 Runs Gemma 4 locally via LiteRT, falls back to LAN Ollama. Includes a smart router, SM-2 spaced repetition, OCR/STT input, and six-language support.
+
+---
+
+### Experience
+
+**Software Development Intern** · A software company · 2025.07 – 2026.08
+
+**Autonomous Driving Intern** · An AD company, Shanghai · 2026.07 – 2026.10
 
 ---
 
