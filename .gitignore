@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+
+# assets/_*.png and assets/_snake_src.svg are deliberately committed: they are
+# the generator's remote-fetch cache, and having them in-tree means a scheduled
+# Actions run can rebuild the card even when the outbound fetch is rate-limited
+# or the proxy is down.

@@ -24,15 +24,22 @@ jobs:
       - name: Install Pillow
         run: pip install Pillow
 
-      - name: Generate profile.svg
-        run: python generate_final.py
+      # Both themes are committed: profile.svg (metis) is the one README shows,
+      # profile-claude.svg is the warm variant.
+      - name: Generate both themes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PROFILE_THEME=metis  python generate_final.py
+          cp profile.svg profile-metis.svg
+          PROFILE_THEME=claude python generate_final.py
+          mv profile.svg profile-claude.svg
+          mv profile-metis.svg profile.svg
 
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile.svg
-          git diff --cached --quiet || git commit -m "auto: update profile.svg (star counts refreshed)"
+          git add profile.svg profile-claude.svg
+          git diff --cached --quiet || git commit -m "auto: update profile themes (star counts refreshed)"
           git push
