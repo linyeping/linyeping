@@ -9,6 +9,7 @@ BG2 = '#161b22'
 BORDER = '#21262d'
 T1 = '#e6edf3'
 T2 = '#8b949e'
+SILVER = '#c9d1d9'
 W = 850
 CM = 24  # card margin
 CRX = 10
@@ -68,6 +69,11 @@ print(f"  Metis: {'OK' if logo_metis else 'FAIL'}")
 # ============================================================
 cw = W - CM * 2
 
+def esc(t):
+    """XML-escape text destined for an SVG node. Bare '&' makes the whole
+    document unparseable, so every dynamic string must go through this."""
+    return (str(t).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
+
 def card(x, y, w, h, accent=None):
     s = []
     s.append(f'<rect x="{x+2}" y="{y+2}" width="{w}" height="{h}" fill="black" opacity="0.25" rx="{CRX}" filter="url(#shadow)"/>')
@@ -91,24 +97,26 @@ def stitle(x, y, text, ci):
 # ============================================================
 def build():
     hdr_h = 240
-    about_h = 185
+    about_h = 175
     res_h = 195
     tech_h = 250
     proj_h = 215
-    exp_h = 300
-    pub_h = 230
-    net_h = 100  # flowing network section
+    kag_h = 205
+    pub_h = 240
+    snake_h = 60  # github contribution snake strip
+    net_h = 70   # flowing network section
     ftr_h = 70
 
     total = (hdr_h + GAP + about_h + GAP + res_h + GAP + tech_h + GAP
-             + proj_h + GAP + exp_h + GAP + pub_h + GAP + net_h + ftr_h)
+             + proj_h + GAP + kag_h + GAP + pub_h + GAP + snake_h + GAP + net_h + ftr_h)
     y_about = hdr_h + GAP
     y_res = y_about + about_h + GAP
     y_tech = y_res + res_h + GAP
     y_proj = y_tech + tech_h + GAP
-    y_exp = y_proj + proj_h + GAP
-    y_pub = y_exp + exp_h + GAP
-    y_net = y_pub + pub_h + GAP
+    y_kag = y_proj + proj_h + GAP
+    y_pub = y_kag + kag_h + GAP
+    y_snake = y_pub + pub_h + GAP
+    y_net = y_snake + snake_h + GAP
     y_ftr = y_net + net_h
 
     # Particles
@@ -268,7 +276,7 @@ def build():
         rw = len(text)*8 + 28
         s.append(f'<rect x="{rx:.0f}" y="{role_y}" width="{rw}" height="24" fill="{color}" opacity="0.1" rx="12"/>')
         s.append(f'<rect x="{rx:.0f}" y="{role_y}" width="{rw}" height="24" fill="none" stroke="{color}" stroke-width="0.8" opacity="0.35" rx="12"/>')
-        s.append(f'<text x="{rx+rw/2:.0f}" y="{role_y+16}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{color}" text-anchor="middle">{text}</text>')
+        s.append(f'<text x="{rx+rw/2:.0f}" y="{role_y+16}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{color}" text-anchor="middle">{esc(text)}</text>')
         rx += rw + 10
 
     # Contact line
@@ -295,18 +303,17 @@ def build():
 
     lines_data = [
         ("$ whoami", "#34A853", True),
-        ("> AI undergraduate, class of 2027  -  GPA 3.48/4.0", T1, False),
         ("> Building desktop & mobile AI agents: Agent Loop, Tool Use, MCP, RAG", T1, False),
         ("> Shipped 3 open-source agent products: Metis, Metis Mobile, GemMate", T1, False),
-        ("> 2 papers published (Springer / CSCD), 1 accepted - see Publications", T1, False),
-        ("> Perception algorithm intern at InceptAI  -  autonomous driving, 2026.07-10", T1, False),
+        ("> 3 papers published - graph neural networks, multimodal fake news detection", T1, False),
+        ("> Kaggle: multiple medals incl. CSIRO bronze, BirdCLEF+ 2026 silver", T1, False),
         ("> Also into CUDA kernel dev and GPU optimization", T1, False),
     ]
     ty = ay + 50
     for idx, (line, color, bold) in enumerate(lines_data):
         wt = "700" if bold else "400"
         dl = 0.12 * idx
-        s.append(f'<text x="{CM+20}" y="{ty}" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="{wt}" fill="{color}" style="animation:typeIn 0.4s ease-out {dl:.2f}s both">{line}</text>')
+        s.append(f'<text x="{CM+20}" y="{ty}" font-family="JetBrains Mono,Fira Code,monospace" font-size="12" font-weight="{wt}" fill="{color}" style="animation:typeIn 0.4s ease-out {dl:.2f}s both">{esc(line)}</text>')
         ty += 20
     # (cursor removed — cleaner look)
     s.append('</g>')
@@ -378,13 +385,13 @@ def build():
         ch = res_h - 52
         s.append(f'<rect x="{cx:.0f}" y="{cy}" width="{sub_w:.0f}" height="{ch}" fill="{BG}" rx="6" stroke="{BORDER}" stroke-width="0.5"/>')
         s.append(f'<rect x="{cx:.0f}" y="{cy}" width="{sub_w:.0f}" height="3" fill="{color}" rx="1.5"/>')
-        s.append(f'<text x="{cx+sub_w/2:.0f}" y="{cy+22}" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="{T1}" text-anchor="middle">{title}</text>')
+        s.append(f'<text x="{cx+sub_w/2:.0f}" y="{cy+22}" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="{T1}" text-anchor="middle">{esc(title)}</text>')
         tag_y = cy + 40
         for tag in tags:
             tw = len(tag)*6.5 + 14
             tx = cx + sub_w/2 - tw/2
             s.append(f'<rect x="{tx:.0f}" y="{tag_y}" width="{tw:.0f}" height="18" fill="{color}" opacity="0.1" rx="9"/>')
-            s.append(f'<text x="{cx+sub_w/2:.0f}" y="{tag_y+13}" font-family="monospace" font-size="10" fill="{color}" text-anchor="middle" opacity="0.85">{tag}</text>')
+            s.append(f'<text x="{cx+sub_w/2:.0f}" y="{tag_y+13}" font-family="monospace" font-size="10" fill="{color}" text-anchor="middle" opacity="0.85">{esc(tag)}</text>')
             tag_y += 24
     s.append('</g>')
 
@@ -417,7 +424,7 @@ def build():
             s.append(f'<rect x="{xc:.0f}" y="{row_y}" width="{chipw:.0f}" height="{chiph}" fill="{color}" opacity="0.1" rx="13"/>')
             s.append(f'<rect x="{xc:.0f}" y="{row_y}" width="{chipw:.0f}" height="{chiph}" fill="none" stroke="{color}" stroke-width="0.8" opacity="0.3" rx="13"/>')
             s.append(f'<circle cx="{xc+12:.0f}" cy="{row_y+chiph/2:.0f}" r="3.5" fill="{color}" opacity="0.6"/>')
-            s.append(f'<text x="{xc+22:.0f}" y="{row_y+chiph/2+4:.0f}" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="{T1}">{name}</text>')
+            s.append(f'<text x="{xc+22:.0f}" y="{row_y+chiph/2+4:.0f}" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" fill="{T1}">{esc(name)}</text>')
             s.append('</g>')
             xc += chipw + 10
             ci2 += 1
@@ -451,7 +458,7 @@ def build():
         else:
             s.append(f'<circle cx="{lx+lsz/2}" cy="{ly+lsz/2}" r="{lsz/2}" fill="{color}" opacity="0.15"/>')
             s.append(f'<text x="{lx+lsz/2}" y="{ly+lsz/2+5}" font-size="16" fill="{color}" text-anchor="middle">{name[0]}</text>')
-        s.append(f'<text x="{lx+lsz+10}" y="{ly+16}" font-family="Google Sans,Segoe UI,sans-serif" font-size="15" font-weight="600" fill="{T1}">{name}</text>')
+        s.append(f'<text x="{lx+lsz+10}" y="{ly+16}" font-family="Google Sans,Segoe UI,sans-serif" font-size="15" font-weight="600" fill="{T1}">{esc(name)}</text>')
         s.append(f'<text x="{lx+lsz+10}" y="{ly+32}" font-family="monospace" font-size="10" fill="{color}">&#9733; {stars}</text>')
         # tech stack chips (single line, ellipsised)
         avail_w = pw - 28
@@ -462,61 +469,74 @@ def build():
                 break
             shown = cand
         if shown:
-            s.append(f'<text x="{px+14:.0f}" y="{pcy+pch-14}" font-family="monospace" font-size="9" fill="{color}" opacity="0.7">{shown}</text>')
+            s.append(f'<text x="{px+14:.0f}" y="{pcy+pch-14}" font-family="monospace" font-size="9" fill="{color}" opacity="0.7">{esc(shown)}</text>')
         # description word wrap
         words = desc.split()
         line = ""
         dy = pcy + 68
         for w_t in words:
             if len(line + " " + w_t) > 46:
-                s.append(f'<text x="{px+14:.0f}" y="{dy}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T2}">{line.strip()}</text>')
+                s.append(f'<text x="{px+14:.0f}" y="{dy}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T2}">{esc(line.strip())}</text>')
                 dy += 15
                 line = w_t
             else:
                 line += " " + w_t
         if line.strip():
-            s.append(f'<text x="{px+14:.0f}" y="{dy}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T2}">{line.strip()}</text>')
+            s.append(f'<text x="{px+14:.0f}" y="{dy}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T2}">{esc(line.strip())}</text>')
     s.append('</g>')
 
     # ================================================================
-    # EXPERIENCE CARD
+    # KAGGLE MEDALS CARD
     # ================================================================
-    ey = y_exp
+    ky = y_kag
     s.append(f'<g style="animation:cardIn 0.5s ease-out 0.35s both">')
-    s.append(card(CM, ey, cw, exp_h))
-    s.append(stitle(CM+16, ey+24, "Experience", 1))
-    s.append(gdots(W-CM-30, ey+20, 2.5, 10))
+    s.append(card(CM, ky, cw, kag_h))
+    s.append(stitle(CM+16, ky+24, "Kaggle", 1))
+    s.append(gdots(W-CM-30, ky+20, 2.5, 10))
 
-    jobs = [
-        ("InceptAI Technology (Shanghai)", "Perception Algorithm Intern", "2026.07 - 2026.10", G[0],
-         "Trained, evaluated and regression-tested behavior prediction models for L4 trunk-logistics AD stack; data cleaning, time alignment, scenario curation."),
-        ("Xisitech (Xi'an)", "Software Development Intern", "2025.07 - 2025.08", G[1],
-         "Feature modules and unit tests; code review and daily standups; interface specs and technical docs."),
-        ("Gansu Univ. ACM Training Team", "Founder & Captain", "2024.03 - 2026.05", G[2],
-         "Built the university ACM team from scratch; ICPC / CCPC / GPLT results; joint training with partner schools."),
-        ("Gansu Univ. AI Association", "President", "2025.07 - 2026.06", G[3],
-         "Ran Datawhale campus events, AWS Kiro Coding Party and AI+X tours. Blue Bridge award rate 12.8% (5/39) \u2192 89% (53/59)."),
+    s.append(f'<text x="{CM+16}" y="{ky+44}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T2}" font-style="italic">Competition medals &#183; add more by extending the kaggle_medals list in generate_final.py</text>')
+
+    med_gap = 14
+    med_w = (cw - 32 - med_gap*3) / 4
+    medals = [
+        ("CSIRO - Image2Biomass Estimation", "Bronze", "296 / 3,805", "#C2703E"),
+        ("BirdCLEF+ 2026", "Silver", "194 / 4,094", SILVER),
     ]
-    jy = ey + 44
-    for org, role, when, color, desc in jobs:
-        # measure first so the accent bar matches the real block height
-        words = desc.split()
-        dl, line = [], ""
+    for mi, (comp, medal, rank, mc) in enumerate(medals):
+        mx = CM + 16 + mi*(med_w+med_gap)
+        mcy = ky + 56
+        mch = kag_h - 68
+        s.append(f'<rect x="{mx:.0f}" y="{mcy}" width="{med_w:.0f}" height="{mch}" fill="{BG}" rx="6" stroke="{BORDER}" stroke-width="0.5"/>')
+        s.append(f'<rect x="{mx:.0f}" y="{mcy}" width="3" height="{mch}" fill="{mc}" rx="1.5"/>')
+        # medal disc — geometry only, no glyph font dependency
+        dcx, dcy, dr = mx + 30, mcy + 32, 19
+        s.append(f'<circle cx="{dcx:.0f}" cy="{dcy}" r="{dr}" fill="{mc}" opacity="0.16"/>')
+        s.append(f'<circle cx="{dcx:.0f}" cy="{dcy}" r="{dr}" fill="none" stroke="{mc}" stroke-width="1.3" opacity="0.6"/>')
+        s.append(f'<circle cx="{dcx:.0f}" cy="{dcy}" r="{dr-4}" fill="none" stroke="{mc}" stroke-width="0.5" opacity="0.32"/>')
+        # ribbon tails
+        s.append(f'<path d="M{dcx-6:.0f} {dcy+dr-4:.0f} L{dcx-6:.0f} {dcy+dr+9:.0f} L{dcx:.0f} {dcy+dr+5:.0f} L{dcx+6:.0f} {dcy+dr+9:.0f} L{dcx+6:.0f} {dcy+dr-4:.0f}" fill="{mc}" opacity="0.45"/>')
+        # competition name (wrapped)
+        words = comp.split()
+        line, clines = "", []
         for w_t in words:
-            if len(line + " " + w_t) > 148:
-                dl.append(line.strip()); line = w_t
+            if len(line + " " + w_t) > 30:
+                clines.append(line.strip()); line = w_t
             else:
                 line += " " + w_t
         if line.strip():
-            dl.append(line.strip())
-        blk_h = 40 + len(dl) * 14
-        s.append(f'<rect x="{CM+16}" y="{jy+2}" width="3" height="{blk_h}" fill="{color}" rx="1.5"/>')
-        s.append(f'<text x="{CM+28}" y="{jy+13}" font-family="Google Sans,Segoe UI,sans-serif" font-size="12" font-weight="600" fill="{T1}">{org}</text>')
-        s.append(f'<text x="{W-CM-24}" y="{jy+13}" font-family="monospace" font-size="10" fill="{T2}" text-anchor="end">{when}</text>')
-        s.append(f'<text x="{CM+28}" y="{jy+28}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{color}">{role}</text>')
-        for li, linetxt in enumerate(dl):
-            s.append(f'<text x="{CM+28}" y="{jy+43+li*14}" font-family="Google Sans,Segoe UI,sans-serif" font-size="10" fill="{T2}">{linetxt}</text>')
-        jy += blk_h + 14
+            clines.append(line.strip())
+        tx = mx + 58
+        for li, linetxt in enumerate(clines[:2]):
+            s.append(f'<text x="{tx:.0f}" y="{mcy+28 + li*14}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T1}" font-weight="600">{esc(linetxt)}</text>')
+        s.append(f'<text x="{tx:.0f}" y="{mcy + mch - 26}" font-family="monospace" font-size="10" fill="{mc}" font-weight="600">{medal.upper()}</text>')
+        s.append(f'<text x="{tx:.0f}" y="{mcy + mch - 11}" font-family="monospace" font-size="9" fill="#6e7681">{esc(rank)}</text>')
+    # "more coming" placeholder card
+    mx = CM + 16 + 2*(med_w+med_gap)
+    mcy = ky + 56
+    mch = kag_h - 68
+    s.append(f'<rect x="{mx:.0f}" y="{mcy}" width="{med_w:.0f}" height="{mch}" fill="none" stroke="{BORDER}" stroke-width="0.8" stroke-dasharray="4 4" rx="6" opacity="0.6"/>')
+    s.append(f'<text x="{mx+med_w/2:.0f}" y="{mcy+mch/2-4}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="#484f58" text-anchor="middle">more to come</text>')
+    s.append(f'<text x="{mx+med_w/2:.0f}" y="{mcy+mch/2+12}" font-family="monospace" font-size="9" fill="#30363d" text-anchor="middle">in progress</text>')
     s.append('</g>')
 
     # ================================================================
@@ -527,33 +547,38 @@ def build():
     s.append(card(CM, puy, cw, pub_h))
     s.append(stitle(CM+16, puy+24, "Publications", 0))
     s.append(gdots(W-CM-30, puy+20, 2.5, 10))
-    s.append(f'<text x="{CM+16}" y="{puy+42}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T2}" font-style="italic">2 published (Early Access) &#183; 1 accepted. DOI links added on request.</text>')
+    s.append(f'<text x="{CM+16}" y="{puy+42}" font-family="Google Sans,Segoe UI,sans-serif" font-size="11" fill="{T2}" font-style="italic">All three published. Click a row to open the DOI.</text>')
 
-    # Title / Venue / Status+Role — title wraps to 2 lines within ~400px
-    cols = [CM+22, CM+56, CM+470, CM+640]
+    # Title / Venue / Status / Year
+    cols = [CM+22, CM+56, CM+520, CM+686]
     thy = puy + 64
     s.append(f'<rect x="{CM+12}" y="{thy-12}" width="{cw-24}" height="20" fill="{BG}" rx="3"/>')
-    for cx, h in zip(cols, ["#","Title","Venue","Status / Role"]):
+    for cx, h in zip(cols, ["#","Title","Venue","Status"]):
         s.append(f'<text x="{cx}" y="{thy}" font-family="monospace" font-size="10" fill="{T2}" font-weight="600">{h}</text>')
 
     papers = [
         ("Social media rumor detection using multi-relational temporal-semantic augmented dynamic graph neural networks",
-         "Complex & Intelligent Systems", "PUBLISHED", G[3], "5th author"),
-        ("A coupled dataset of couplets for Tang-style poetic imitation",
-         "China Scientific Data", "PUBLISHED", G[3], "7th author"),
+         "Complex & Intelligent Systems", "PUBLISHED", G[3], "2026.08",
+         "https://doi.org/10.1007/s40747-026-02463-5"),
+        ("A dataset of Tang poetry sentence pairs for metrical imitation",
+         "China Scientific Data", "PUBLISHED", G[3], "2026.09",
+         "https://doi.org/10.11922/11-6035.csd.2025.0219.zh"),
         ("A decoupled approach for multimodal fake news detection incorporating entity knowledge enhancement and multi-scale adaptive fusion",
-         "Data Intelligence", "ACCEPTED", G[2], "5th author"),
+         "Data Intelligence", "PUBLISHED", G[3], "2026.09",
+         "https://doi.org/10.3724/2096-7004.di.2025.1349"),
     ]
-    for row, (title, venue, status, sc, role) in enumerate(papers):
+    for row, (title, venue, status, sc, year, doi) in enumerate(papers):
         ryr = thy + 28 + row*40
         if row % 2 == 0:
             s.append(f'<rect x="{CM+12}" y="{ryr-14}" width="{cw-24}" height="38" fill="{BG}" opacity="0.4" rx="2"/>')
+        # whole row is a clickable link to the DOI
+        s.append(f'<a href="{doi}" target="_blank"><rect x="{CM+12}" y="{ryr-14}" width="{cw-24}" height="38" fill="transparent"/></a>')
         s.append(f'<text x="{cols[0]}" y="{ryr}" font-family="monospace" font-size="11" fill="{T2}">{row+1}</text>')
-        # wrap title to 3 lines within ~400px
+        # wrap title to 3 lines within ~440px
         words = title.split()
         dl, line = [], ""
         for w_t in words:
-            if len(line + " " + w_t) > 58:
+            if len(line + " " + w_t) > 64:
                 dl.append(line.strip()); line = w_t
             else:
                 line += " " + w_t
@@ -562,13 +587,29 @@ def build():
         dl = dl[:3]
         base = ryr + (len(dl) - 1) * 7
         for li, linetxt in enumerate(dl):
-            s.append(f'<text x="{cols[1]}" y="{base + li*14}" font-family="Google Sans,Segoe UI,sans-serif" font-size="10" fill="{T1}" font-style="italic">{linetxt}</text>')
-        s.append(f'<text x="{cols[2]}" y="{ryr}" font-family="monospace" font-size="10" fill="{T2}">{venue}</text>')
+            s.append(f'<text x="{cols[1]}" y="{base + li*14}" font-family="Google Sans,Segoe UI,sans-serif" font-size="10" fill="{T1}" font-style="italic">{esc(linetxt)}</text>')
+        s.append(f'<text x="{cols[2]}" y="{ryr}" font-family="monospace" font-size="10" fill="{T2}">{esc(venue)}</text>')
         bw = 76
         bx = cols[3]
         s.append(f'<rect x="{bx}" y="{ryr-11}" width="{bw}" height="18" fill="{sc}" opacity="0.15" rx="9"/>')
         s.append(f'<text x="{bx+bw/2}" y="{ryr+1}" font-family="monospace" font-size="9" fill="{sc}" text-anchor="middle" font-weight="600">{status}</text>')
-        s.append(f'<text x="{bx+bw+12}" y="{ryr+1}" font-family="monospace" font-size="9" fill="#6e7681">{role}</text>')
+        s.append(f'<text x="{bx+bw+10}" y="{ryr+1}" font-family="monospace" font-size="9" fill="#6e7681">{year}</text>')
+    s.append('</g>')
+
+    # ================================================================
+    # CONTRIBUTION SNAKE STRIP
+    # ================================================================
+    shy = y_snake
+    s.append(f'<g style="animation:cardIn 0.5s ease-out 0.5s both">')
+    s.append(card(CM, shy, cw, snake_h))
+    s.append(stitle(CM+16, shy+24, "Contribution Graph", 3))
+    s.append(gdots(W-CM-30, shy+20, 2.5, 10))
+    # The snake SVGs are generated by .github/workflows/snake.yml and committed
+    # to snake/ on main. Referencing them from this repo keeps the payload local
+    # (no third-party proxy, no broken image if the workflow has not run yet).
+    snake_url = "https://raw.githubusercontent.com/linyeping/linyeping/main/snake/github-contribution-grid-snake-dark.svg"
+    s.append(f'<image href="{snake_url}" x="{CM+16}" y="{shy+32}" width="{cw-32}" height="{snake_h-40}" preserveAspectRatio="xMidYMid meet" opacity="0.9"/>')
+    s.append(f'<text x="{W-CM-24}" y="{shy+24}" font-family="monospace" font-size="9" fill="#484f58" text-anchor="end">snake/ &#183; refreshed daily</text>')
     s.append('</g>')
 
     # ================================================================
@@ -611,6 +652,19 @@ def build():
 # ============================================================
 out_dir = os.path.dirname(os.path.abspath(__file__))
 svg = build()
+
+# Hard fail on malformed XML — a single bare '&' makes GitHub render nothing
+# at all, and the symptom (blank profile) gives no hint about the cause.
+import xml.etree.ElementTree as ET
+try:
+    ET.fromstring(svg)
+except ET.ParseError as e:
+    line, col = e.position
+    ctx = svg.split('\n')[line - 1][max(0, col - 60):col + 60]
+    print(f"[fail] malformed SVG at line {line}, col {col}: {e}")
+    print(f"       ...{ctx}...")
+    raise SystemExit(1)
+
 with open(os.path.join(out_dir, 'profile.svg'), 'w', encoding='utf-8') as f:
     f.write(svg)
 print(f"[ok] profile.svg ({len(svg)} bytes)")
