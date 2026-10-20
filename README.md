@@ -31,9 +31,9 @@ Runs Gemma 4 locally via LiteRT, falls back to LAN Ollama. Includes a smart rout
 
 ### Experience
 
-**Software Development Intern** · A software company · 2025.07 – 2026.08
+**Software Development Intern** · A software company, Xi'an · 2025.07 – 2026.08
 
-**Autonomous Driving Intern** · An AD company, Shanghai · 2026.07 – 2026.10
+**Perception Algorithm Intern** · An AD company, Shanghai · 2026.07 – 2026.10
 
 ---
 
