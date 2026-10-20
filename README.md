@@ -40,20 +40,62 @@ Runs Gemma 4 locally via LiteRT, falls back to LAN Ollama. Includes a smart rout
 
 ### Publications
 
-| # | Title | Venue | Year |
-|---|-------|-------|------|
-| 1 | [Social media rumor detection using multi-relational temporal-semantic augmented dynamic graph neural networks](https://doi.org/10.1007/s40747-026-02463-5) | Complex & Intelligent Systems | 2026 |
-| 2 | [A dataset of Tang poetry sentence pairs for metrical imitation](https://doi.org/10.11922/11-6035.csd.2025.0219.zh) | China Scientific Data | 2026 |
-| 3 | [A decoupled approach for multimodal fake news detection incorporating entity knowledge enhancement and multi-scale adaptive fusion](https://doi.org/10.3724/2096-7004.di.2025.1349) | Data Intelligence | 2026 |
+<table>
+<thead>
+<tr>
+<th align="center" width="40">#</th>
+<th align="left">Title</th>
+<th align="center" width="200">Venue</th>
+<th align="center" width="60">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td><a href="https://doi.org/10.1007/s40747-026-02463-5">Social media rumor detection using multi-relational temporal-semantic augmented dynamic graph neural networks</a></td>
+<td align="center">Complex & Intelligent Systems</td>
+<td align="center">2026</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td><a href="https://doi.org/10.11922/11-6035.csd.2025.0219.zh">A dataset of Tang poetry sentence pairs for metrical imitation</a></td>
+<td align="center">China Scientific Data</td>
+<td align="center">2026</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td><a href="https://doi.org/10.3724/2096-7004.di.2025.1349">A decoupled approach for multimodal fake news detection incorporating entity knowledge enhancement and multi-scale adaptive fusion</a></td>
+<td align="center">Data Intelligence</td>
+<td align="center">2026</td>
+</tr>
+</tbody>
+</table>
 
 ---
 
-### Kaggle
+### Kaggle &ensp;·&ensp; [Profile ↗](https://www.kaggle.com/linyeping)
 
-| Competition | Medal | Rank |
-|-------------|-------|------|
-| BirdCLEF+ 2026 | 🥈 Silver | 194 / 4,094 |
-| CSIRO — Image2Biomass Prediction | 🥉 Bronze | 296 / 3,805 |
+<table>
+<thead>
+<tr>
+<th align="left">Competition</th>
+<th align="center" width="120">Medal</th>
+<th align="center" width="120">Rank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BirdCLEF+ 2026</td>
+<td align="center">🥈 Silver</td>
+<td align="center">194 / 4,094</td>
+</tr>
+<tr>
+<td>CSIRO — Image2Biomass Prediction</td>
+<td align="center">🥉 Bronze</td>
+<td align="center">296 / 3,805</td>
+</tr>
+</tbody>
+</table>
 
 ---
 
